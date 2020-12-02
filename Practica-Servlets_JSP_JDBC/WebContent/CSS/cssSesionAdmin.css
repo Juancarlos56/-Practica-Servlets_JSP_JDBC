@@ -1,0 +1,167 @@
+@charset "ISO-8859-1";
+button {
+    border: none;
+    background-color: white;
+}
+
+.boton :hover {
+    background-color: #eaeaea;
+}
+
+#families {
+    visibility: hidden;
+}
+
+.encabezado {
+    width: 100%;
+    height: 180px;
+}
+
+.encabezado1 {
+    width: 15%;
+    float: left;
+}
+
+.encabezado2 {
+    width: 60%;
+    float: left;
+    margin-right: 10%;
+}
+
+.encabezado3 {
+    width: 15%;
+    float: left;
+}
+
+.logo {
+    width: 16%;
+    height: 180px;
+}
+
+.menu {
+    width: 90%;
+    margin-top: 2%;
+}
+
+.ingreUsuEncabezado3 {
+    float: left;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+.agreUsuEncabezado3 {
+    float: left;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+
+/* CSS PARA LA BARRA DE MENU */
+
+#menu {
+    width: 100%;
+    height: 45px;
+    margin-top: 1%;
+    padding: 5px 20px 5px 20px;
+    background-color: white;
+    text-align: center;
+}
+
+#menu li {
+    font-size: 15px;
+    padding: 4px;
+    margin-left: 7%;
+    background-color: white;
+    color: #AF927C;
+    display: inline-block;
+}
+
+#menu li a {
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    color: rgb(253, 76, 0);
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    -ms-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+#menu li a:hover,
+#menu li:hover>a {
+    color: black;
+    background: #FFE4E3;
+}
+
+
+/*///////////////////////AQUI EMPEIZA EL CUERPESITO///////////////////////////////// */
+
+.cuerpo {
+    background-color: peru;
+    width: 100%;
+}
+
+.registrarAdminPro {
+    background-color: #f8ece6;
+    width: 30%;
+    height: 100%;
+    padding: 10px;
+    float: left;
+}
+
+.nuevoPro {
+    background-color: #e3e3e3;
+}
+
+.listarAdminPro {
+    background-color: #e3e3e3;
+}
+
+.eliminarAdminPro {
+    background-color: #e3e3e3;
+}
+
+.buscarAdminPro {
+    background-color: #f8ece6;
+    float: left;
+    width: 28%;
+    padding: 10px;
+}
+
+.modificarAdminPro {
+    background-color: #f8ece6;
+    float: left;
+    width: 38%;
+    padding: 10px;
+}
+
+.modCom {
+    background-color: #e3e3e3;
+}
+
+.sepBot {
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.aprobarReq {
+    background-color: #f8ece6;
+    ;
+    float: left;
+    width: 100%;
+}
+
+a {
+    outline-style: none;
+}
+
+table {
+    width: 100%;
+}
+
+
+.listarTodosReq {
+    background-color: #e3e3e3;
+}
