@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.ups.edu.dao.Empresa_DAO;
+import ec.ups.edu.modelo.Administrador;
 import ec.ups.edu.modelo.Empresa;
 import ec.ups.edu.modelo.Usuario;
 
@@ -144,6 +145,31 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 	public Empresa find() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Empresa empresa_de_un_admin(Administrador admin) {
+		Empresa em = null;
+		ResultSet rs = jdbc.query("Select * From Administrador Where cod_amd="+admin.getCodigo_admin()+"");
+		
+		
+		try {
+			if(rs != null && rs.next()) {
+				
+				ResultSet rsem = jdbc.query("Select * From Empresa Where cod_emp ="+rs.getInt("cod_empresa"));
+				
+				if(rsem != null && rsem.next()) {
+					em = new Empresa(rsem.getInt("cod_emp"), rsem.getString("nombre"), rsem.getString("horario"),
+							rsem.getString("descripcion"), rsem.getString("logoURL")); 
+					
+					//Proceso de revision
+				}
+			}
+		}catch(SQLException e) {
+			System.out.println(">>>WARNING (JDBCAdministraddorDAO:validarAdmin): " + e.getMessage());
+		}
+		
+		return em;
 	}
 
 }

@@ -1,3 +1,7 @@
+<%@page import="ec.ups.edu.dao.Empresa_DAO"%>
+<%@page import="ec.ups.edu.dao.DAOFactory"%>
+<%@page import="ec.ups.edu.modelo.Empresa"%>
+<%@page import="ec.ups.edu.modelo.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,7 +17,15 @@
 <body>
 
 	<%
+	
 			HttpSession login = request.getSession();
+			
+			
+			Administrador adm = (Administrador)request.getAttribute("admin");
+			Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
+			Empresa e = emp.empresa_de_un_admin(adm);
+			
+			/*HttpSession login = request.getSession();
 			
 			if (login.getAttribute("login") != null){
 				String autentificacion = login.getAttribute("login").toString();
@@ -24,7 +36,7 @@
 				}
 			}else{
 				response.sendRedirect("index.html");
-			}
+			}*/
 		
 		%>
 		
@@ -39,7 +51,8 @@
                 <div class="encabezado2">
 
                     <div id="menu" class="menu">
-                        <h2>Bienvenido Administrador</h2>
+                        <h1>Bienvenido Administrador <% out.println(adm.getNombre()); %></h1>
+                        <h2>Requermientos de compra para la empresa </h2>
                         <nav>
                             <ol>
                                 <li>
