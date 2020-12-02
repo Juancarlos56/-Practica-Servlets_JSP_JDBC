@@ -150,7 +150,30 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 		return null;
 	}
 	
+	@Override
+	public Producto findByPedidoProductoNombre(String nombre) {
+		Producto p =  null;
+		//Aqui pon el query John para la lectura de Producto... 
+		ResultSet rs = jdbc.query("SELECT * FROM Producto WHERE nombre LIKE " + nombre + "%");
+		
 	
+		try {
+			if(rs != null && rs.next()) {
+				
+				//Cambiar por los atributos de la tabla usuario... 
+				//Metodo constructor del Usuario, contiene los atributos y hereda de persona
+				p= new Producto(rs.getInt("cod_pro"), rs.getString("nombre"), rs.getDouble("precio")
+						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"));
+				
+				
+			}
+		}catch(SQLException e) {
+			System.out.println(">>>WARNING (UserDAO:findByPedidoProductoNombre):"+e.getMessage());
+		}
+		
+		return p;
+
+	}
 	
 
 }
