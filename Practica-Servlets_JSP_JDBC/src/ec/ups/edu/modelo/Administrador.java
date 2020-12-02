@@ -13,12 +13,12 @@ public class Administrador extends Persona implements Serializable{
 	private Empresa empresa; 
 
 	public Administrador() {
-		
+		this.empresa = empresa;
 	}
 	
 	
 
-	public Administrador(int codigo_admin, String correo, String password, String nombre, String rol, Empresa empresa) {
+	public Administrador(int codigo_admin, String correo, String password, String nombre, String rol) {
 		super(correo, password, nombre, rol);
 		this.codigo_admin = codigo_admin;
 		this.empresa = empresa;

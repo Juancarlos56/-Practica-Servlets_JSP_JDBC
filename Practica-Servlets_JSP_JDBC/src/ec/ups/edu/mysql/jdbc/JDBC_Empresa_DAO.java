@@ -34,32 +34,98 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 
 	@Override
 	public Empresa read(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Empresa emp = null;
+		
+		ResultSet rs = jdbc.query("SELECT * FROM Empresa WHERE cod_emp=" + id);
+		
+		try {
+			if (rs != null && rs.next()) {
+				emp = new Empresa(rs.getInt("cod_emp"), rs.getString("nombre"), rs.getString("horario"), rs.getString("descripcion")
+						, rs.getString("logoURL"));
+			}
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (EmpresaDAO:read):" + e.getMessage());
+		}
+		
+		return emp;
 	}
 
 	@Override
 	public void update(Empresa entety) {
-		// TODO Auto-generated method stub
-		
+		jdbc.update("UPDATE Empresa SET nombre='" + entety.getNombre() +  "',horario='" + entety.getHorario() + "',descripcion='" + entety.getDescripcion()
+		+ "',logoURL='" + entety.getLogo_url() + "' WHERE cod_emp=" + entety.getCodigo_empresa());
 	}
 
 	@Override
 	public void delete(Empresa entity) {
-		// TODO Auto-generated method stub
-		
+		jdbc.update("DELETE FROM Empresa WHERE cod_emp=" + entity.getCodigo_empresa());
 	}
 
 	@Override
 	public ArrayList<Empresa> findArrayList() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+		
+		ResultSet rs = jdbc.query("SELECT * FROM Empresa");
+		try {
+			while (rs.next()) {
+				empresas.add(new Empresa(rs.getInt("cod_emp"), rs.getString("nombre"), rs.getString("horario"), rs.getString("descripcion")
+										,rs.getString("logoURL")));
+			}
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (JDBC_EmpresaDAO:find): " + e.getMessage());
+		}
+		
+		return empresas;
 	}
 
 	@Override
 	public void createArrayList(ArrayList<Empresa> entity) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public Empresa empresa_de_un__usuario(Usuario usuario) {
+		Empresa em = null;
+		ResultSet rs = jdbc.query("Select * From Usuario Where cod_usu="+usuario.getCodigo_usu()+"");
+		
+		
+		try {
+			if(rs != null && rs.next()) {
+				
+				ResultSet rsem = jdbc.query("Select * From Empresa Where cod_emp ="+rs.getInt("cod_empresa"));
+				
+				if(rsem != null && rsem.next()) {
+					em = new Empresa(rsem.getInt("cod_emp"), rsem.getString("nombre"), rsem.getString("horario"),
+							rsem.getString("descripcion"), rsem.getString("logoURL")); 
+					
+					//Proceso de revision
+				}
+			}
+		}catch(SQLException e) {
+			System.out.println(">>>WARNING (JDBCUsuarioDAO:validarU): " + e.getMessage());
+		}
+		
+		return em;
+	}
+	
+	@Override
+	public Empresa findByNombreEmpresa(String nombre) {
+		Empresa emp = null;
+		
+		ResultSet rs = jdbc.query("SELECT * FROM Empresa WHERE nombre LIKE" + nombre + "%");
+		
+		try {
+			if (rs != null && rs.next()) {
+				emp = new Empresa(rs.getInt("cod_emp"), rs.getString("nombre"), rs.getString("horario"), rs.getString("descripcion")
+						, rs.getString("logoURL"));
+			}
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (EmpresaDAO:findByNombreEmpresa):" + e.getMessage());
+		}
+		
+		return emp;
+
 	}
 
 	@Override
@@ -78,38 +144,6 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 	public Empresa find() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Empresa empresa_de_un__usuario(Usuario usuario) {
-		Empresa em = null;
-		try {
-			ResultSet rs = jdbc.query("Select * From Usuario Where cod_usu="+usuario.getCodigo_usu()+"");
-			int codUsuEmp = rs.getInt("cod_empresa");
-			
-			if(rs != null && rs.next()) {
-				System.out.println("Si existe un usuario con ese codigo"+codUsuEmp);
-				ResultSet rsem = jdbc.query("Select * From Empresa Where cod_emp ="+codUsuEmp+";");
-				
-				if(rsem != null && rsem.next()) {
-					
-					em = new Empresa(rsem.getInt("cod_emp"), rsem.getString("nombre"), rsem.getString("horario"),
-							rsem.getString("descripcion"), rsem.getString("logoURL")); 
-					System.out.println("Si existe la Empresa: "+em.getNombre());
-					//Proceso de revision
-				}else {
-					System.out.println("NO existe una empresa");
-				}
-			}else {
-				
-				System.out.println("NO existe una empresa");
-				
-			}
-		}catch(SQLException e) {
-			System.out.println(">>>WARNING (JDBCUsuarioDAO:validarU): " + e.getMessage());
-		}
-		
-		return em;
 	}
 
 }
