@@ -83,20 +83,27 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 	@Override
 	public Empresa empresa_de_un__usuario(Usuario usuario) {
 		Empresa em = null;
-		ResultSet rs = jdbc.query("Select * From Usuarios Where cod_usu="+usuario.getCodigo_usu()+"");
-		
-		
 		try {
+			ResultSet rs = jdbc.query("Select * From Usuario Where cod_usu="+usuario.getCodigo_usu()+"");
+			int codUsuEmp = rs.getInt("cod_empresa");
+			
 			if(rs != null && rs.next()) {
+				System.out.println("Si existe un usuario con ese codigo"+codUsuEmp);
+				ResultSet rsem = jdbc.query("Select * From Empresa Where cod_emp ="+codUsuEmp+";");
 				
-				ResultSet rsem = jdbc.query("Select * From Empresa Where cod_emp ="+rs.getInt("cod_empresa"));
-				
-				if(rsem != null && rs.next()) {
+				if(rsem != null && rsem.next()) {
+					
 					em = new Empresa(rsem.getInt("cod_emp"), rsem.getString("nombre"), rsem.getString("horario"),
 							rsem.getString("descripcion"), rsem.getString("logoURL")); 
-					
+					System.out.println("Si existe la Empresa: "+em.getNombre());
 					//Proceso de revision
+				}else {
+					System.out.println("NO existe una empresa");
 				}
+			}else {
+				
+				System.out.println("NO existe una empresa");
+				
 			}
 		}catch(SQLException e) {
 			System.out.println(">>>WARNING (JDBCUsuarioDAO:validarU): " + e.getMessage());

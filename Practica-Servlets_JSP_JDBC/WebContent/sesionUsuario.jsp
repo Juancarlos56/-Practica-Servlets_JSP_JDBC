@@ -37,7 +37,7 @@
 
                     <div id="menu" class="menu">
                         <h1>Bienvedio <% out.println(us.getNombre()); %>  </h1>
-                        <h2>Requermientos de compra</h2>
+                        <h2>Requermientos de compra para la empresa <% out.println(e.getNombre()); %></h2>
                         <nav>
                             <ol>
                                 <li>

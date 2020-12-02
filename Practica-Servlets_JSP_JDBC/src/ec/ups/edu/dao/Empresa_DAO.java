@@ -1,5 +1,7 @@
 package ec.ups.edu.dao;
 
+import java.sql.SQLException;
+
 import ec.ups.edu.modelo.Empresa;
 import ec.ups.edu.modelo.Usuario;
 
