@@ -18,11 +18,23 @@
 <body>
 	<%
 		HttpSession login = request.getSession();
+		Usuario us = null;
+		if (login.getAttribute("usuario") != null){
+			String autentificacion = login.getAttribute("usuario").toString();
+			if (autentificacion.equals("usuario") == false){
+				session.invalidate();
+			    response.sendRedirect("index.html");
+			    return;
+			}else{
+				us = (Usuario)request.getAttribute("usuario");
+				Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
+				Empresa e = emp.empresa_de_un__usuario(us);
+			}
+		}else{
+			response.sendRedirect("index.html");
+		}
 		
 		
-		Usuario us = (Usuario)request.getAttribute("usuario");
-		Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
-		Empresa e = emp.empresa_de_un__usuario(us);
 		
 	%>
 	
@@ -36,8 +48,19 @@
                 <div class="encabezado2">
 
                     <div id="menu" class="menu">
-                        <h1>Bienvedio <% out.println(us.getNombre()); %>  </h1>
-                        <h2>Requermientos de compra para la empresa <% out.println(e.getNombre()); %></h2>
+                        <h1>Bienvenido <% 
+                        					try{
+                        						if (us != null) {
+                            						out.println(us.getNombre()); 
+                            					}	
+                        					}catch(NullPointerException e){
+                        						response.sendRedirect("index.html");
+                        					}
+                        						
+                        					
+                        					%>  
+                        </h1>
+                        <h2>Requermientos de compra para la empresa); %></h2>
                         <nav>
                             <ol>
                                 <li>

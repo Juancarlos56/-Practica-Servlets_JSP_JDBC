@@ -1,6 +1,7 @@
 package ec.ups.edu.mysql.jdbc;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,14 +105,28 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 	@Override
 	public Administrador control_logeo_ad(String password, String correo) {
 		Administrador ad = null;
-		ResultSet rs = jdbc.query("Select * From Adminiistrador WHERE correo=" + correo +"'AND password='" + password + "'");
+		ResultSet rs = jdbc.query("Select * From Administrador Where correo='"+correo+"' AND password='"+password+"'");
+		
+		
+		try {
+			if(rs != null && rs.next()) {
+				
+				System.out.println("nombre: "+rs.getString("nombre"));
+				
+				ad = new Administrador(rs.getInt("cod_amd"), rs.getString("correo"), rs.getString("password")
+						, rs.getString("nombre"), rs.getString("rol"));
+			}
+		}catch(SQLException e) {
+			System.out.println(">>>WARNING (JDBCAdminiDAO:validarAdmin): " + e.getMessage());
+		}
+		
 		return ad;
 	}
 
 	@Override
 	public void update(Administrador entety) {
-		//jdbc.update("UPDATE Adminnistrador SET correo='" + entety.getCorreo() + "',password='" + entety.getPassword() + 
-		//		"', nombre='" + entety.getNombre() + "',rol='" + entety.getRol(), "' WHERE cod_admin=" + entety.getCodigo_admin());
+		jdbc.update("UPDATE Adminnistrador SET correo='" + entety.getCorreo() + "',password='" + entety.getPassword() + 
+				"', nombre='" + entety.getNombre() + "',rol='" + entety.getRol()+"' WHERE cod_admin=" + entety.getCodigo_admin());
 		
 	}
 

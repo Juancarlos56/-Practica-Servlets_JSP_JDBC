@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ec.ups.edu.dao.Administrador_DAO;
 import ec.ups.edu.dao.DAOFactory;
 import ec.ups.edu.dao.Usuario_DAO;
+import ec.ups.edu.modelo.Administrador;
 import ec.ups.edu.modelo.Usuario;
 
 /**
@@ -42,43 +44,41 @@ public class InicioSesion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String url = null;
-		HttpSession session = request.getSession(true);
-	
-		String us =   request.getParameter("correo");
-		String pw =   request.getParameter("contrasena");
-		
-		Usuario_DAO usarioLogin = DAOFactory.getFactory().getUsuario_DAO();
-		
-		Usuario usuario = usarioLogin.control_logeo(pw, us);
-		
-		if (usuario == null) {
-			response.sendRedirect("index.html");
-		}else {
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				String url = null;
+				HttpSession session = request.getSession(true);
 			
-			String rol = usuario.getRol();
-		
-
-			switch (rol) {
-			case "usuario":
+				String us =   request.getParameter("correo");
+				String pw =   request.getParameter("contrasena");
 				
-				request.setAttribute("usuario", usuario);
-				request.getRequestDispatcher("sesionUsuario.jsp").forward(request, response);
-				break;
-			
-			case "admin":
-				request.setAttribute("admin", usuario);
-				request.getRequestDispatcher("sesionUsuario.jsp").forward(request, response);
+				Usuario_DAO usarioLogin = DAOFactory.getFactory().getUsuario_DAO();
+				Administrador_DAO admin_log = DAOFactory.getFactory().getUAdministrador_DAO();
 				
-				break;
-			default:
-				break;
-			}
+				Usuario usuario = usarioLogin.control_logeo(pw, us);
+				Administrador adm = admin_log.control_logeo_ad(pw, us);
 				
-
-		}
+				if ((usuario == null) && (adm == null)) {
+					response.sendRedirect("index.html");
+				}
+				
+				else {
+					if (adm != null) {
+						request.getSession().setAttribute("admin", "admin");
+						request.setAttribute("admin", adm);
+						request.getRequestDispatcher("sesionAdmin.jsp").forward(request, response);
+						System.out.println("DEntro del if que queremos");
+					}
+					if (usuario != null) {
+						request.getSession().setAttribute("usuario", "usuario");
+						request.setAttribute("usuario", usuario);
+						request.getRequestDispatcher("sesionUsuario.jsp").forward(request, response);
+					}
+					
+					System.out.println("LEGGAMOS HASTA AQUI SEGUNDO IF");
+					
+					
+				}
 	}
 
 }

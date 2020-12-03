@@ -1,3 +1,7 @@
+<%@page import="ec.ups.edu.dao.DAOFactory"%>
+<%@page import="ec.ups.edu.modelo.Empresa"%>
+<%@page import="ec.ups.edu.dao.Empresa_DAO"%>
+<%@page import="ec.ups.edu.modelo.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,20 +16,23 @@
 </head>
 <body>
 
-	<%
+		<%
 			HttpSession login = request.getSession();
-			
-			if (login.getAttribute("login") != null){
-				String autentificacion = login.getAttribute("login").toString();
-				if (autentificacion.equals("correctoAdmin") == false){
+			Administrador adm = null;
+			if (login.getAttribute("admin") != null){
+				String autentificacion = login.getAttribute("admin").toString();
+				if (autentificacion.equals("admin") == false){
 					session.invalidate();
 				    response.sendRedirect("index.html");
 				    return;
+				}else{
+					adm = (Administrador)request.getAttribute("admin");
+					Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
+					Empresa e = emp.empresa_de_un_admin(adm);
 				}
 			}else{
 				response.sendRedirect("index.html");
 			}
-		
 		%>
 		
 	<header>
@@ -39,7 +46,16 @@
                 <div class="encabezado2">
 
                     <div id="menu" class="menu">
-                        <h2>Bienvenido Administrador</h2>
+                    	 <h1>Bienvenido de nuevo<%  
+					                    	 try{
+					     						if (adm != null) {
+					     							out.println(adm.getNombre());
+					         					}	
+					     					}catch(NullPointerException e){
+					     						response.sendRedirect("index.html");
+					     					}
+                    	 				%>  
+                    	 </h1>
                         <nav>
                             <ol>
                                 <li>
