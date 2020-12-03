@@ -46,7 +46,7 @@
                 <div class="encabezado2">
 
                     <div id="menu" class="menu">
-                    	 <h1>Bienvenido de nuevo<%  
+                    	 <h1>Bienvenido de nuevo <%  
 					                    	 try{
 					     						if (adm != null) {
 					     							out.println(adm.getNombre());
