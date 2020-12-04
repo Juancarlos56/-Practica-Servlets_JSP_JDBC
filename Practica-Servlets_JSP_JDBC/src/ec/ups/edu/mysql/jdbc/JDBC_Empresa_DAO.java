@@ -8,6 +8,7 @@ import java.util.List;
 import ec.ups.edu.dao.Empresa_DAO;
 import ec.ups.edu.modelo.Administrador;
 import ec.ups.edu.modelo.Empresa;
+import ec.ups.edu.modelo.Producto;
 import ec.ups.edu.modelo.Usuario;
 
 public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implements Empresa_DAO{
@@ -170,5 +171,70 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 		}
 		
 		return em;
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	public ArrayList<Producto> productosEmpresa(String nombreProducto, int idEmpresa) {
+		
+		ArrayList<Producto> prod = new ArrayList<Producto>();
+		
+		
+		Producto p = null;
+		
+		System.out.println("Nombre producto: "+nombreProducto+" id Empresa: "+idEmpresa);
+		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion, e.cod_emp \r\n"
+				+ "            FROM Producto p, Empresa e \r\n"
+				+ "            WHERE (p.nombre LIKE '%"+nombreProducto+"%') AND (e.cod_emp = "+idEmpresa+")\r\n"
+				+ "");
+		
+		try {
+			if (pe != null) {
+				System.out.println("Pasooooooooooo");
+				while (pe.next()) {
+					System.out.println("Aquiiiiii.....");
+					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"));
+					prod.add(p);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (JDBC_EmpresaDAO:find): " + e.getMessage());
+		}
+		
+		
+		return prod;
+	}
+	
+	
+public ArrayList<Producto> todosLosProductosEmpresa(int idEmpresa) {
+		
+		ArrayList<Producto> prod = new ArrayList<Producto>();
+		
+		
+		Producto p = null;
+		
+		System.out.println("id Empresa: "+idEmpresa);
+		
+		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion, p.cod_categoria, e.cod_emp \r\n"
+				+ "            FROM Producto p, Categoria c, Empresa e \r\n"
+				+ "            WHERE (e.cod_emp ="+idEmpresa+") AND (c.cod_empresa = "+idEmpresa+") \r\n"
+				+ "");
+		
+		
+		try {
+			if (pe != null) {
+				while (pe.next()) {
+					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"));
+					prod.add(p);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (JDBC_EmpresaDAO:find): " + e.getMessage());
+		}
+		
+		
+		return prod;
 	}
 }

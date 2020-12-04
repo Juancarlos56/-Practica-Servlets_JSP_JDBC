@@ -14,6 +14,7 @@ import ec.ups.edu.dao.Administrador_DAO;
 import ec.ups.edu.dao.DAOFactory;
 import ec.ups.edu.dao.Usuario_DAO;
 import ec.ups.edu.modelo.Administrador;
+import ec.ups.edu.modelo.Empresa;
 import ec.ups.edu.modelo.Usuario;
 
 /**
@@ -47,6 +48,7 @@ public class InicioSesion extends HttpServlet {
 				response.setContentType("text/html");
 				PrintWriter out = response.getWriter();
 				String url = null;
+				Empresa emp = null;
 				HttpSession session = request.getSession(true);
 			
 				String us =   request.getParameter("correo");
@@ -65,14 +67,19 @@ public class InicioSesion extends HttpServlet {
 				else {
 					if (adm != null) {
 						request.getSession().setAttribute("admin", "admin");
+						emp = DAOFactory.getFactory().getEmpresa_DAO().empresa_de_un_admin(adm);
+						request.setAttribute("emp", emp);
 						request.setAttribute("admin", adm);
 						request.getRequestDispatcher("sesionAdmin.jsp").forward(request, response);
 						System.out.println("DEntro del if que queremos");
 					}
 					if (usuario != null) {
 						request.getSession().setAttribute("usuario", "usuario");
+						emp = DAOFactory.getFactory().getEmpresa_DAO().empresa_de_un__usuario(usuario);
+						request.setAttribute("emp", emp);
 						request.setAttribute("usuario", usuario);
 						request.getRequestDispatcher("sesionUsuario.jsp").forward(request, response);
+					
 					}
 					
 					System.out.println("LEGGAMOS HASTA AQUI SEGUNDO IF");

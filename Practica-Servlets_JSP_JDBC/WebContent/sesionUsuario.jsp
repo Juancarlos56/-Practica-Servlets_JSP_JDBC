@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="ec.ups.edu.modelo.Producto"%>
 <%@page import="ec.ups.edu.modelo.Empresa"%>
 <%@page import="ec.ups.edu.dao.Empresa_DAO"%>
 <%@page import="ec.ups.edu.dao.DAOFactory"%>
@@ -12,12 +14,18 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="StyleSheet" href="CSS/cssSesionUsuario.css" TYPE="text/css">
-    <script src="js/listaProductosPublicos.js" type="text/javascript"></script>
+    <script src="./js/listaProductosPublicos.js" type="text/javascript"></script>
+    <script src="./js/buscarProductos.js" type="text/javascript"></script>
 	<title>SesionUsuario</title>
 </head>
 <body>
+
+	<c:set var="pro" scope="request" value="${producto}" />
+	
+	
 	<%
 		HttpSession login = request.getSession();
+		Empresa empresa = null;
 		Usuario us = null;
 		if (login.getAttribute("usuario") != null){
 			String autentificacion = login.getAttribute("usuario").toString();
@@ -26,9 +34,15 @@
 			    response.sendRedirect("index.html");
 			    return;
 			}else{
-				us = (Usuario)request.getAttribute("usuario");
-				Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
-				Empresa e = emp.empresa_de_un__usuario(us);
+				
+				try{
+					us = (Usuario)request.getAttribute("usuario");
+					empresa = (Empresa)request.getAttribute("emp");
+				}catch(NullPointerException e){
+					response.sendRedirect("index.html");
+				}
+				
+				
 			}
 		}else{
 			response.sendRedirect("index.html");
@@ -36,10 +50,11 @@
 		
 		
 		
+        
 	%>
+		<header>
 	
-	
-	<div class="encabezado">
+			<div class="encabezado">
 
                 <div class="encabezado1">
                     <a href="index.html" title="Ir a la Pagina principal"> <img src="imagenes/LogoPidelo.png" width="200px" height="175px" alt="Logo"> </a>
@@ -49,7 +64,7 @@
 
                     <div id="menu" class="menu">
                         <h1>Bienvenido <% 
-                        					try{
+					                        try{
                         						if (us != null) {
                             						out.println(us.getNombre()); 
                             					}	
@@ -60,33 +75,35 @@
                         					
                         					%>  
                         </h1>
-                        <h2>Requermientos de compra para la empresa); %></h2>
+                        <h2>Requermientos de compra para la empresa <% 
+               					try{
+               						if (us != null) {
+                   						out.println(empresa.getNombre()); 
+                   					}	
+               					}catch(NullPointerException e){
+               						response.sendRedirect("index.html");
+               					}			
+               					
+                        	%>  
+                        
+                        </h2>
                         <nav>
                             <ol>
                                 <li>
-                                    <a href="registrarReq.html">
-                                        <h2>Registrar</h2>
-                                    </a>
+                                    <a href="registrarReq.html">Registrar</a>
                                 </li>
                                 <li>
-                                    <a href="modificarReq.html">
-                                        <h2>Modificar</h2>
-                                    </a>
+                                    <a href="modificarReq.html">Modificar</a>
                                 </li>
                                 <li>
-                                    <a href="eliminarReq.html">
-                                        <h2>Eliminar</h2>
-                                    </a>
+                                    <a href="eliminarReq.html">Eliminar</a>
                                 </li>
                                 <li>
-                                    <a href="buscarReq.html">
-                                        <h2>Buscar</h2>
-                                    </a>
+                                	
+                                    <a href="#">Buscar Producto</a>
                                 </li>
                                 <li>
-                                    <a href="listarReq.html">
-                                        <h2>Listar</h2>
-                                    </a>
+                                    <a href="./private/user/jsp/ListarProductos.jsp">Listar</a>
                                 </li>
                             </ol>
                         </nav>
@@ -123,12 +140,17 @@
                     
                     <H3>Buscar Producto</H3>
                     <label id="nomProducto" for="nomProducto">Ingresar Nombre Producto</label>
-                    <input type="text" id="nomPro" name="nomPro" value="" placeholder="Nombre producto ..." />
-                    <input type="button" id="buscarPro" name="buscarPro" value="Buscar" onclick="buscarPro()" />
+                    
+                    <% String url = "/Practica-Servlets_JSP_JDBC/EnvioDatos?idUsuario=" + us.getCodigo_usu() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=BuscarProductos.jsp";%>
+                     <a href="<%=url%>">Buscar Producto LPM</a>
+                    
+                   	    
+				    </table>
                     
                     <br>
-                    <p name="mostrarProducto"> AQUI RECIBO EL PRODUCTO</p>
+                    <div id="informacion"><b>Producto Buscado</b></div>
                     <br>
+                    
                     <label for="estadoPed" id="estadoPed">Estado:</label>
                     <input class="sepBot" type="text" id="estadoPedido" name="estadoPedido" value="PENDIENTE" readonly />
                     <br>
