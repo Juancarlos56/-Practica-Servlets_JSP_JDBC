@@ -57,7 +57,7 @@
 			<div class="encabezado">
 
                 <div class="encabezado1">
-                    <a href="index.html" title="Ir a la Pagina principal"> <img src="imagenes/LogoPidelo.png" width="200px" height="175px" alt="Logo"> </a>
+                    <a href="publico/index.html" title="Ir a la Pagina principal"> <img src="image/Logo2.png" width="200px" height="175px" alt="Logo"> </a>
                 </div>
 
                 <div class="encabezado2">

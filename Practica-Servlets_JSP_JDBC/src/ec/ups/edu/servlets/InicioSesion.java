@@ -59,9 +59,9 @@ public class InicioSesion extends HttpServlet {
 				
 				Usuario usuario = usarioLogin.control_logeo(pw, us);
 				Administrador adm = admin_log.control_logeo_ad(pw, us);
-				
+				System.out.println("Aquiiiiiiiiiiiiiiiiii");
 				if ((usuario == null) && (adm == null)) {
-					response.sendRedirect("index.html");
+					response.sendRedirect("publico/index.html");
 				}
 				
 				else {
@@ -70,7 +70,7 @@ public class InicioSesion extends HttpServlet {
 						emp = DAOFactory.getFactory().getEmpresa_DAO().empresa_de_un_admin(adm);
 						request.setAttribute("emp", emp);
 						request.setAttribute("admin", adm);
-						request.getRequestDispatcher("sesionAdmin.jsp").forward(request, response);
+						request.getRequestDispatcher("private/admin/jsp/sesionAdmin.jsp").forward(request, response);
 						System.out.println("DEntro del if que queremos");
 					}
 					if (usuario != null) {
@@ -78,7 +78,7 @@ public class InicioSesion extends HttpServlet {
 						emp = DAOFactory.getFactory().getEmpresa_DAO().empresa_de_un__usuario(usuario);
 						request.setAttribute("emp", emp);
 						request.setAttribute("usuario", usuario);
-						request.getRequestDispatcher("sesionUsuario.jsp").forward(request, response);
+						request.getRequestDispatcher("private/user/jsp/sesionUsuario.jsp").forward(request, response);
 					
 					}
 					
