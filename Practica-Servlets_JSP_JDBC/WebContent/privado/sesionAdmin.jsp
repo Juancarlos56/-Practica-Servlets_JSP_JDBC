@@ -5,7 +5,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	
-    <link rel="StyleSheet" href="CSS/cssSesionAdmin.css" TYPE="text/css">
+    <link rel="StyleSheet" href="../CSS/cssSesionAdmin.css" TYPE="text/css">
     <script src="js/listaProductosPublicos.js" type="text/javascript"></script>
 	<title>SesionAdmin</title>
 
@@ -37,53 +37,14 @@
                 </div>
 
                 <div class="encabezado2">
-
-                    <div id="menu" class="menu">
-                        <h2>Bienvenido Administrador</h2>
-                        <nav>
-                            <ol>
-                                <li>
-                                    <a href="registrarReq.html">
-                                        <h2>Registrar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="modificarReq.html">
-                                        <h2>Modificar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="eliminarReq.html">
-                                        <h2>Eliminar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="buscarReq.html">
-                                        <h2>Buscar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="listarReq.html">
-                                        <h2>Listar</h2>
-                                    </a>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-
-
                 </div>
 
                 <div class="encabezado3">
                     <div class="ingreUsuEncabezado3">
-                        <a href="iniciarSesion.html"> <img src="https://image.flaticon.com/icons/png/512/64/64572.png" width="50px" height="50px" alt="Acceder a la cuenta"></a>
-                        <h5>Acceder</h5>
+                          <a href="/Salir"> <img src="https://image.flaticon.com/icons/png/512/64/64572.png" width="50px" height="50px" alt="Salir  cuenta"> <h5>SALIR</h5></a>
+                        
                     </div>
 
-                    <div class="agreUsuEncabezado3">
-                        <a href="crearCuenta.html"><img src="https://image.flaticon.com/icons/png/512/94/94979.png" width="50px" height=50px "" alt="Crear Cuenta"></a>
-                        <h5>Crear Cuenta</h5>
-                    </div>
                 </div>
 
             </div>
@@ -92,6 +53,36 @@
 
 
         <div class="cuerpo">
+        
+        
+                            <div id="menu" class="menu">
+                        <h2>Bienvenido Administrador</h2>
+                        <nav>
+                            <ol>
+                                <li>
+                                
+                              
+                                    <a href=" ">
+                                        <h2>Registrar Producto</h2>
+                                        <br>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href=" ">
+                                    	
+                                        <h2>Modificar Producto</h2>
+                                        <br>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href=" ">
+                                        <h2>Listar/Eliminar Producto</h2>
+                                    </a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+        
 
             <div class="registrarAdminPro">
                 <h2> Registrar Producto</h2>

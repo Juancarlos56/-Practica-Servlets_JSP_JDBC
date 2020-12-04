@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Tupidelo.com</title>
+    <LINK REL=StyleSheet HREF="../CSS/index.css" TYPE="text/css">
+</head>
+
+<body background="../image/index.png">
+
+    <header>
+
+        <div class="encabezado">
+
+            <div class="encabezado1">
+                <a href="index.html" title="Ir a la Pagina principal "> <img src="../image/Logo2.png" width="200px" height="175px" alt="Logo"> </a>
+            </div>
+
+
+            <div class="encabezado3">
+                <div class="ingreUsuEncabezado3">
+                    <a href="login.jsp"> <img src="https://image.flaticon.com/icons/png/512/64/64572.png" width="75px" height="75px" alt="Acceder a la cuenta"></a>
+                    <h5>Acceder </h5>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <section class=cuadrado>
+
+        <TABLE style="width: 100%;">
+            <TR>
+                <TD>
+
+                    <form action="listarProdInv" method="post">
+                        <a>PIZZA HUT <br><br> 
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pizza_Hut_1967-1999_logo.svg/1280px-Pizza_Hut_1967-1999_logo.svg.png" width="200px" height="175px" >
+                            </a>
+
+                        <input id="idPizzaHut" name="idProInv" type="hidden" value="1">
+                        <br>
+                        <input type="submit" value="Ver Productos" style=" margin-left: 18%;">
+                    </form>
+
+                </TD>
+                <TD>
+                    <form action="listarProdInv" method="post">
+                        <a>Supermecado TIA <br><br> 
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tia_Supermarket-Logo.svg/1200px-Tia_Supermarket-Logo.svg.png" width="200px" height="175px">
+                        </a>
+                        <input id="idTia" name="idProInv" type="hidden" value="2">
+                        <br>
+                        <input type="submit" value="Ver Productos" style=" margin-left: 18%;">
+                    </form>
+
+                </TD>
+                <TD>
+                    <form action="listarProdInv" method="post">
+                        <a>Floristeria Katy Flor  <br><br> 
+                            <img src="../image/logokaty.png" width="200px" height="175px">
+                        </a>
+                        <input id="idKaty" name="idProInv" type="hidden" value="3">
+                        <br>
+                        <input type="submit" value="Ver Productos" style=" margin-left: 18%;" >
+                    </form>
+                </TD>
+            </TR>
+        </TABLE>
+
+
+    </section>
+
+</body>
+
+</html>

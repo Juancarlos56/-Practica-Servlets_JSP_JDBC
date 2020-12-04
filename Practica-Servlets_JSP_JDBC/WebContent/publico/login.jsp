@@ -4,18 +4,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="../CSS/cssIniciarSesion.css" TYPE="text/css">
 <title>Login Usuario</title>
+
 </head>
-<body>
+<body background="../image/login.png" >
 
-<header>
-        <a href="index.html" title="Ir a la Pagina principal"> <img src="imagenes/LogoPidelo.png" alt="Logo" id="leftFloat" width="100px" height="100px"> </a>
-    </header>
-
-    <div class="imagenEncabezado">
-        <a href="index.html" title="Ir a la Pagina principal"> <img src="imagenes/LogoPidelo.png" alt="Logo" width="250px" height="250px" style="margin-top: 28%;"> </a>
-
-    </div>
+	<header>
+        <a href="index.html" title="Ir a la Pagina principal"> <img src="../image/Logo2.png" alt="Logo" id="leftFloat" width="100px" height="100px"> </a>
+ 	</header>
+ 	
+ 	<section class= "cuadrado">
 
     <form id="formulario01" method="post" action="iniciar">
 
@@ -26,10 +25,11 @@
         <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña ..." />
         <br>
         <input class="boton" type="submit" id="login" name="login" value="Iniciar Sesión" />
-        
-
-
     </form>
+ 	
+ 	</section>
+
+
     
 </body>
 </html>
