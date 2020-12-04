@@ -20,7 +20,7 @@
     <form id="formulario01" method="post" action="iniciar">
 
         <label for="correo"> <h2>Correo electrónico </h2></label>
-        <input type="text" id="correo" name="correo" value="" placeholder="Ingrese el correo ..." />
+        <input type="text" id="correo" name="correo" value="" placeholder="Ingrese el correo..." />
         <br>
         <label for="contrasena"><h2>Constraseña</h2></label>
         <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña ..." />
