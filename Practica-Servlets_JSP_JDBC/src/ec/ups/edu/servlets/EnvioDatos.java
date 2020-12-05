@@ -39,8 +39,6 @@ public class EnvioDatos extends HttpServlet {
 		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
 		String pagina = request.getParameter("pagina");
 		
-		System.out.println("Busqueda de Producto de la empresa: "+idEmpresa+" idUsuario: "+idUsuario+"Pagina: "+pagina);
-		
 		//ArrayList<Producto> producto = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nombrePro, idEmpresa);
 		Usuario usuario = DAOFactory.getFactory().getUsuario_DAO().read(idUsuario);
 		Empresa empresa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
@@ -51,9 +49,8 @@ public class EnvioDatos extends HttpServlet {
 		
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("empresa", empresa);
-		//response.sendRedirect("sesionUsuario.jsp");
 		request.getRequestDispatcher(url).forward(request, response);
-
+			
 	}
 
 	/**
