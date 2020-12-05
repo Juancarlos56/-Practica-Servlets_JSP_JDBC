@@ -94,7 +94,7 @@ public class NuevoPedido extends HttpServlet {
 			
 			for (int i=0;i<pedido.size();i++){
 				Pedido ped=pedido.get(i);
-			<tr>
+			//<tr>
 						<td><%=producto.getCodigo_pro()%></td>
 						<td><%=producto.getNombre()%></td>
 					    <td><%=producto.getPrecio()%></td>
