@@ -2,6 +2,10 @@
  * 
  */
 
+/**
+ * 
+ */
+
 
 function EnviarDatos(idUsuario,idEmpresa,pagina) {   
 	if (window.XMLHttpRequest) {
@@ -54,7 +58,8 @@ function buscarProducto(idEmp) {
 
 
 function mostrarProductos(codPro, nomPro, PrecioPro) {
-    document.getElementById("codPro").value = codPro;
+    console.log("Si llego perro");
+	document.getElementById("codPro").value = codPro;
 	document.getElementById("nombreProducto").value = nomPro;
 	document.getElementById("precioPr").value = PrecioPro;	
 }

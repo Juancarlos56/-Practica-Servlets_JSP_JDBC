@@ -11,9 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Buscar Producto</title>
 <script src="js/buscarProductos.js" type="text/javascript"></script>
-<script>
-	
-</script>
+<script></script>
 </head>
 <body>
 
@@ -65,6 +63,7 @@
 	            <br>
 	            
 	            <input class="boton" type="button" id="guardarNuevoReq" name="guardarNuevoReq" value="Guadar Requerimiento" onclick="realizarPedido(<%=usuario.getCodigo_usu()%>)"/>
+				
 				<div class="separador"> </div>
 		        <div id="informacion2"><b>Verificacion de creacion del pedido</b></div>
 		        
