@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ec.ups.edu.dao.DAOFactory;
+import ec.ups.edu.modelo.Empresa;
 import ec.ups.edu.modelo.Producto;
 
 /**
@@ -37,13 +38,15 @@ public class BuscarProducto extends HttpServlet {
 		
 		String nomPro = request.getParameter("nomPro");
 		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
+		Empresa empesa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
 		String pagina = request.getParameter("pagina");
 		ArrayList<Producto> pro = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nomPro, idEmpresa);
 		
 		String url = "/private/user/jsp/mostrarProductos.jsp";
 		request.setAttribute("productos", pro);
+		request.setAttribute("empresaBusca", empesa);
 		request.getRequestDispatcher(url).forward(request, response);
-	
+		System.out.println("Busqueda de producto pasado");
 	}
 	
 

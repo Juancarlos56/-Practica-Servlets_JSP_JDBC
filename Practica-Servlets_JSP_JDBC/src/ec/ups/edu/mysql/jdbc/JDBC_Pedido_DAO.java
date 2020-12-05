@@ -28,9 +28,9 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 				"	cod_producto int null,\r\n" + 				
 				"	PRIMARY KEY (cod_ped), \r\n" + 
 				"	FOREIGN KEY (cod_usuario)  \r\n" +
-				"		REFERENCES  Producto (cod_pro),\r\n" + 
+				"		REFERENCES  Usuario (cod_usu),\r\n" + 
 				"	FOREIGN KEY (cod_producto)  \r\n" +
-				"		REFERENCES  Usuario (cod_usu)        ON DELETE CASCADE\r\n" + 
+				"		REFERENCES  Producto (cod_pro)        ON DELETE CASCADE\r\n" + 
 				")");
 		
 	}
@@ -40,7 +40,7 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 		
 		
 		jdbc.update("INSERT INTO Pedido (estado,cantidad,total,cod_usuario,cod_producto) VALUES"
-				+" ( '" + pedido.getEstado() + "', "
+				+" ('" + pedido.getEstado() + "', "
 				+ pedido.getCantidad() + ","+pedido.getTotal()
 				+ ","+pedido.getUsuario().getCodigo_usu()
 				+","+pedido.getProducto().getCodigo_pro()+")");

@@ -53,43 +53,47 @@ function buscarProducto(idEmp) {
 }
 
 
- function obtenerValoresTabla(e) {
-	
-	console.log("Tabla: "+e);
-	
-    	/*
-		var valores="";
-		var elementosTD=e.srcElement.parentElement.getElementsByTagName("td");
-		for(let i=0;i<elementosTD.length;i++){
-			valores+=elementosTD[i].innerHTML+"\n";
-		}
-		alert(valores);*/
-	}
-
-
-function mostrarProducto(codPro) {
-	
-	
-    var nomPro = document.getElementById("nomPro").value;
-	var nomPro = document.getElementById("nomPro").value;
-	var nomPro = document.getElementById("nomPro").value;
-	var nomPro = document.getElementById("nomPro").value;
-	var nomPro = document.getElementById("nomPro").value;
-	
-
-
-
-	console.log("Estamos al final idEmp: "+codPro);
-	
-    if (nomPro == "") {
-        document.getElementById("informacion").innerHTML = "";
-    } else {
-		document.getElementById("informacion").innerHTML = this.responseText;
-    }
-    return false;
+function mostrarProductos(codPro, nomPro, PrecioPro) {
+    document.getElementById("codPro").value = codPro;
+	document.getElementById("nombreProducto").value = nomPro;
+	document.getElementById("precioPr").value = PrecioPro;	
 }
 
+function calcularTotal() {		
+	var precio = document.getElementById("precioPr").value;
+	var cantidad = document.getElementById("cantidadPro").value;
+	var total = precio*cantidad
+	document.getElementById("mostrarTotalPed").value = total;
 
+}
+
+function realizarPedido(idUsu) {
+	
+	var idUsuario = idUsu;		
+	console.log("Este es el usuario: "+idUsu);
+	var codPro = document.getElementById("codPro").value;
+	var cantidad = document.getElementById("cantidadPro").value;
+	var total = document.getElementById("mostrarTotalPed").value
+	
+	if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+	xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //alert("llegue");
+            document.getElementById("informacion2").innerHTML = this.responseText;
+        }
+    };
+    
+	xmlhttp.open("GET", "/Practica-Servlets_JSP_JDBC/NuevoPedido?idUsuario="+idUsuario+"&cantidad="+cantidad+"&total="+total+"&codPro="+codPro, true);
+	xmlhttp.send();
+		
+}
 
 
 
