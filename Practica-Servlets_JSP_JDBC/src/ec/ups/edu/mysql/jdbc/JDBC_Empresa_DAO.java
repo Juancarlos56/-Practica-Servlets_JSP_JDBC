@@ -188,14 +188,14 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 		
 		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion \r\n"
 				+ "            FROM Producto p, Categoria c, Empresa e \r\n"
-				+ "            WHERE p.nombre LIKE '%"+nombreProducto+"%' AND c.cod_cat = p.cod_categoria AND c.cod_empresa = "+idEmpresa+" AND e.cod_emp = "+idEmpresa+"\r\n"
+				+ "            WHERE p.nombre LIKE '%"+nombreProducto+"%' AND p.estado LIKE 'ACTIVO' AND c.cod_cat = p.cod_categoria AND c.cod_empresa = "+idEmpresa+" AND e.cod_emp = "+idEmpresa+"\r\n"
 				+ "");
 		
 		try {
 			if (pe != null) {
 				while (pe.next()) {
 					System.out.println("Aquiiiiii.....");
-					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"));
+					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"),pe.getString("estado"));
 					prod.add(p);
 				}
 			}
@@ -209,7 +209,7 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 	}
 	
 	
-public ArrayList<Producto> todosLosProductosEmpresa(int idEmpresa) {
+	public ArrayList<Producto> todosLosProductosEmpresa(int idEmpresa) {
 		
 		ArrayList<Producto> prod = new ArrayList<Producto>();
 		
@@ -227,7 +227,7 @@ public ArrayList<Producto> todosLosProductosEmpresa(int idEmpresa) {
 		try {
 			if (pe != null) {
 				while (pe.next()) {
-					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"));
+					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"),pe.getString("estado"));
 					prod.add(p);
 				}
 			}

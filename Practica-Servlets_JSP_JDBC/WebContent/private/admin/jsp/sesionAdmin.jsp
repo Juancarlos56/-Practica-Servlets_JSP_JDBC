@@ -109,7 +109,7 @@
               	</li>
               
               <li style="border-bottom-style: inset;"> 
-              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&aprobarPed.jsp";%>
+              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=aprobarPed.jsp";%>
              		<a href="<%=url3%>"><h2>Aprobar Pedidos</h2></a>
               	</li>
           </nav>

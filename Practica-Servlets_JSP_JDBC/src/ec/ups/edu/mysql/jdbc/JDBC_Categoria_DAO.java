@@ -68,7 +68,7 @@ public class JDBC_Categoria_DAO extends JDBCGenericDAO<Categoria, Integer> imple
 					if (rsprod != null) {
 						
 						Producto pro = new Producto(rsprod.getInt("cod_pro"), rsprod.getString("nombre"), rsprod.getDouble("precio")
-								, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"));
+								, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"), rsprod.getString("estado"));
 						
 						c.addProducto(pro);					
 					}
@@ -127,7 +127,7 @@ public class JDBC_Categoria_DAO extends JDBCGenericDAO<Categoria, Integer> imple
 						if (rsprod != null) {
 							
 							Producto pro = new Producto(rsprod.getInt("cod_pro"), rsprod.getString("nombre"), rsprod.getDouble("precio")
-									, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"));
+									, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"),rsprod.getString("estado"));
 							
 							c.addProducto(pro);					
 						}

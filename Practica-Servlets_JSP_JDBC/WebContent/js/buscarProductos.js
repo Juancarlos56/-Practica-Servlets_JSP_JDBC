@@ -59,11 +59,12 @@ function buscarProducto(idEmp) {
 
 
 
-function mostrarProductos(codPro, nomPro, PrecioPro) {
-    console.log("Si llego perro");
+function mostrarProductos(codPro, nomPro, PrecioPro, iva) {
+    console.log("ivaaaaaaaaaaa: "+iva);
 	document.getElementById("codPro").value = codPro;
 	document.getElementById("nombreProducto").value = nomPro;
-	document.getElementById("precioPr").value = PrecioPro;	
+	document.getElementById("precioPr").value = PrecioPro;
+	document.getElementById("iva").value = iva;	
 }
 
 
@@ -71,7 +72,9 @@ function mostrarProductos(codPro, nomPro, PrecioPro) {
 function calcularTotal() {		
 	var precio = document.getElementById("precioPr").value;
 	var cantidad = document.getElementById("cantidadPro").value;
-	var total = precio*cantidad
+	var iva = document.getElementById("iva").value;	
+	var calIva = ((precio*cantidad)*iva)/100;
+	var total = (precio*cantidad)+calIva
 	document.getElementById("mostrarTotalPed").value = total;
 
 }

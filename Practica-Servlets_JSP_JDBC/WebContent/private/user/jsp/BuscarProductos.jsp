@@ -61,6 +61,11 @@
 	            
 	            <label for="cantidadLabel" id="cantidadLabel" style="margin-right: 50px;" > Cantidad:  </label>
 	            <input type="number" id="cantidadPro" name="cantidadPro" value="" placeholder="Cantidad de producto..."  />
+	            <br>
+	            
+	            <label for="ivaLabel" id="ivaLabel" style="margin-right: 50px;" > IVA:  </label>
+	            <input type="text" id="iva" name="iva" value="" placeholder="Porcentaje de IVA..."/>
+	            
 	            <input class="sepBot" type="button" id="calcularTotalPro" name="calcularTotalPro" value="CalcularTotal " onclick="calcularTotal()" />
 	            <br>
 	            
