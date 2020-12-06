@@ -2,8 +2,6 @@
  * 
  */
 
-
-
 function buscarProducto(idEmp, idUsuario) {
 	
     var nomPro = document.getElementById("nomPro").value;
