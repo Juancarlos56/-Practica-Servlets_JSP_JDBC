@@ -15,7 +15,7 @@
 <script></script>
 </head>
 <body background="image/regPedido.png">
-<section class="cuadrado">
+<section class="cuadrado" >
 
 		<% 
 	 	Usuario usuario= (Usuario)request.getAttribute("usuario");
