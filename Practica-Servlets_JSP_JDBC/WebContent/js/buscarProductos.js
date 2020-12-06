@@ -57,12 +57,16 @@ function buscarProducto(idEmp) {
 }
 
 
+
+
 function mostrarProductos(codPro, nomPro, PrecioPro) {
     console.log("Si llego perro");
 	document.getElementById("codPro").value = codPro;
 	document.getElementById("nombreProducto").value = nomPro;
 	document.getElementById("precioPr").value = PrecioPro;	
 }
+
+
 
 function calcularTotal() {		
 	var precio = document.getElementById("precioPr").value;

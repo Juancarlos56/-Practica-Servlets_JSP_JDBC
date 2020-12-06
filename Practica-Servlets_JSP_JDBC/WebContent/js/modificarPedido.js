@@ -2,7 +2,7 @@
  * 
  */
 
-function buscarProducto(idEmp, idUsuario) {
+function listarPedido(idEmp, idUsuario) {
 	
     var nomPro = document.getElementById("nomPro").value;
 	console.log("Estamos al final idUsuario:"+idUsuario+" idEmp: "+idEmp);

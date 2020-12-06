@@ -32,6 +32,20 @@ public class Pedido implements Serializable{
 		this.usuario = new Usuario();
 	}
 
+	
+	
+	
+	public Pedido(int codigo_pedido, String estado, int cantidad, Double total, Producto producto, Usuario usuario) {
+		super();
+		this.codigo_pedido = codigo_pedido;
+		this.estado = estado;
+		this.cantidad = cantidad;
+		this.total = total;
+		this.producto = producto;
+		this.usuario = usuario;
+	}
+
+
 
 	public double calculoTotal(double c, double p) {
 		return c*p;

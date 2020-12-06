@@ -1,4 +1,4 @@
-package ec.ups.edu.mysql.jdbc;
+package ec.ups.edu.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +34,10 @@ public class ModificarPedido extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		System.out.print("ESTOY EN EL SERVLET DE MODIFICAR PEDIDO ");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Empresa empresa = null;
@@ -44,7 +48,7 @@ public class ModificarPedido extends HttpServlet {
 
 		
 		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
-
+		System.out.println(pedidos.size());
 		String tablaDatos="";
 		String tablaIndex = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
 				"<tr>"+
