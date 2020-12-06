@@ -34,7 +34,7 @@
 					    <td><%=producto.getIva()%></td>
 					    <td><%=producto.getDescripcion()%></td>
 					    <td><img src='<%=producto.getUrl_imagen()%>' width='200px' height='175px'></td>
-					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarProductos(<%=producto.getCodigo_pro()%>,'<%=producto.getNombre()%>',<%=producto.getPrecio()%>)"></td>
+					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarProductos(<%=producto.getCodigo_pro()%>,'<%=producto.getNombre()%>',<%=producto.getPrecio()%>,<%=producto.getIva()%>)"></td>
 				</tr>			 
 		   	<% }
 		}

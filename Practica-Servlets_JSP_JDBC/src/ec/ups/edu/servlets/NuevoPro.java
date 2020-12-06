@@ -52,14 +52,14 @@ public class NuevoPro extends HttpServlet {
 		String url = request.getParameter("urlPro");
 		String desc = request.getParameter("descriPro");
 		
-		
-		Producto p = new Producto(1,nombre, precio, iva, url,desc );
+		Producto p = new Producto(1,nombre, precio, iva, url,desc,estPro);
 		
 		us = DAOFactory.getFactory().getUsuario_DAO().read(usu);
 		
 	
 		DAOFactory.getFactory().getProducto_DAO().create(p);
-		out.println("<h3>El pedido ha sido creado </h3>");
+
+		out.println("<h3>Se ha creado un nuevo producto </h3>");
 		
 		
 	}

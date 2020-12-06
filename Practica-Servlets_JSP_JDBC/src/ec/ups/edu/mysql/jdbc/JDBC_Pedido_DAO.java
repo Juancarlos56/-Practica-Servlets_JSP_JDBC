@@ -69,7 +69,7 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 				ResultSet rsprod = jdbc.query("SELECT * FROM Producto WHERE cod_pro=" + rs.getInt("cod_producto"));
 				if (rsprod != null && rsprod.next()) {
 					Producto pro = new Producto(rsprod.getInt("cod_pro"), rsprod.getString("nombre"), rsprod.getDouble("precio")
-							, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"));
+							, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"),rsprod.getString("estado"));
 					
 					p.setProducto(pro);					
 				}
@@ -228,7 +228,7 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 					
 					if (rsprod != null && rsprod.next()) {
 						Producto pro = new Producto(rsprod.getInt("cod_pro"), rsprod.getString("nombre"), rsprod.getDouble("precio")
-								, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"));
+								, rsprod.getInt("porcentajeIva"), rsprod.getString("url_imagen"), rsprod.getString("descripcion"),rsprod.getString("estado"));
 						
 						
 						p.setProducto(pro);					

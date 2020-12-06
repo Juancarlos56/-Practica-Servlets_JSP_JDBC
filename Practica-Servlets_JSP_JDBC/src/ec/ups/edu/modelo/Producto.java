@@ -8,7 +8,7 @@ public class Producto {
 	private int iva;
 	private String url_imagen;
 	private String descripcion;
-	
+	private String estado;
 	
 	
 	public Producto() {
@@ -17,7 +17,7 @@ public class Producto {
 	
 	
 	
-	public Producto(int codigo_pro, String nombre, Double precio, int iva, String url_imagen, String descripcion) {
+	public Producto(int codigo_pro, String nombre, Double precio, int iva, String url_imagen, String descripcion, String estado) {
 		super();
 		this.codigo_pro = codigo_pro;
 		this.nombre = nombre;
@@ -25,6 +25,7 @@ public class Producto {
 		this.iva = iva;
 		this.url_imagen = url_imagen;
 		this.descripcion = descripcion;
+		this.estado = estado;
 	}
 
 
@@ -65,6 +66,17 @@ public class Producto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 
 
 	@Override

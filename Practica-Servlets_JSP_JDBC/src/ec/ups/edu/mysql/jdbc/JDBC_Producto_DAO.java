@@ -40,10 +40,10 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 		//Ejemplo INSERT INTO usuarios (nombre, apellidos) VALUES ('Juan','Garcia Pérez');
 		//Falta buscar a la empresa
 		
-		jdbc.update("INSERT INTO Producto (nombre,precio,porcentajeIva,url_imagen,descripcion,cod_categoria) VALUES"
+		jdbc.update("INSERT INTO Producto (nombre,precio,porcentajeIva,url_imagen,descripcion,estado,cod_categoria) VALUES"
 				+" ( '" + producto.getNombre() + "', '"
 				+ producto.getPrecio() + "','"+producto.getIva()
-				+"','"+producto.getUrl_imagen()+"','"+producto.getDescripcion()+ "',"+1+")");
+				+"','"+producto.getUrl_imagen()+"','"+producto.getDescripcion()+ "','"+ producto.getEstado()+"'," +1+")");
 		
 	}
 
@@ -62,7 +62,7 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 				//Cambiar por los atributos de la tabla usuario... 
 				//Metodo constructor del Usuario, contiene los atributos y hereda de persona
 				p= new Producto(rs.getInt("cod_pro"), rs.getString("nombre"), rs.getDouble("precio")
-						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"));
+						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"),rs.getString("estado"));
 				
 				
 			}
@@ -135,7 +135,7 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 				//John Actualizar por los atributos que tiene la base de datos
 				
 				Producto p= new Producto(rs.getInt("cod_pro"), rs.getString("nombre"), rs.getDouble("precio")
-						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"));
+						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"),rs.getString("estado"));
 				productos.add(p);
 			}
 		}catch(SQLException e) {
@@ -163,7 +163,7 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 				//Cambiar por los atributos de la tabla usuario... 
 				//Metodo constructor del Usuario, contiene los atributos y hereda de persona
 				p= new Producto(rs.getInt("cod_pro"), rs.getString("nombre"), rs.getDouble("precio")
-						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"));
+						, rs.getInt("porcentajeIva"), rs.getString("url_imagen"), rs.getString("descripcion"),rs.getString("estado"));
 				
 				
 			}
