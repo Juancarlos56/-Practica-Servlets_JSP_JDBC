@@ -50,7 +50,7 @@ public class NuevoPedido extends HttpServlet {
 		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
 		
 		String tablaDatos="";
-		String tablaIndex = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
+		String tablaIndex = "<table  class='tg' id='tablaBuscar' style='width:95%'>"+
 				"<tr>"+
 					"<th class='tg-46ru'>Nombre del Producto</th>"+
 				    "<th class='tg-46ru'>Cantidad Pedida</th>"+
