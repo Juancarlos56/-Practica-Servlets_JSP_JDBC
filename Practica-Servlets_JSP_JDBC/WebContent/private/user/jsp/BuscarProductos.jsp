@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>HACER PEDIDO </title>
+<title>Hacer Pedido </title>
 <script src="js/buscarProductos.js" type="text/javascript"></script>
 <link rel="StyleSheet" href="CSS/buscaPro.css" TYPE="text/css">
 <script></script>

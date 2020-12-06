@@ -20,7 +20,6 @@
 		
 		String t = "";
 		String n = "";
-		
 		ArrayList<Producto> pro = (ArrayList<Producto>)request.getAttribute("productos");
 		if(pro !=null){
 		
@@ -34,14 +33,12 @@
 					    <td><%=producto.getIva()%></td>
 					    <td><%=producto.getDescripcion()%></td>
 					    <td><img src='<%=producto.getUrl_imagen()%>' width='200px' height='175px'></td>
-					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarProductos(<%=producto.getCodigo_pro()%>,'<%=producto.getNombre()%>',<%=producto.getPrecio()%>)"></td>
-				</tr>			 
+					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarPedidoPro('<%=producto.getNombre()%>')"></td>
+				</tr>	
+						 
 		   	<% }
 		}
 		%>	
 		
-		
-		
-			 
-</table>    
-    
+					 
+</table> 
