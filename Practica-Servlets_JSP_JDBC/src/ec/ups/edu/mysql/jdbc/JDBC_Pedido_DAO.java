@@ -133,7 +133,7 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 						Pedido pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"));
 						c = rp.getInt("p.cod_usuario");
 						p = rp.getInt("p.cod_producto");
-						ResultSet rp2 = jdbc.query("SELECT * FROM Producto WHERE cod_pro="+p);
+						ResultSet rp2 = jdbc.query("SELECT  * FROM Producto WHERE cod_pro="+p);
 						ResultSet rp3 = jdbc.query("SELECT * FROM Usuario WHERE cod_usu="+codigo_usu);
 						
 						if(rp2 != null && rp2.next()&& rp3 != null && rp3.next()) {
