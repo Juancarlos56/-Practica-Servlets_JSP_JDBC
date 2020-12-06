@@ -58,12 +58,14 @@
                         <br>
                         <label for="totalPedido" id="totalPedido" name="totalPedido">Total</label>
                         <input class="sepBot" type="number" id="total" name="total" value="0" readonly />
-                        <br>
-                        <br>
-                        <input class="boton" type="submit" id="requerModificado" name="requerimientoModificado" value="Guardar Modificacion" />
+                        <input class="boton" type="button" id="totalPed" name="totalPed" value="Calcular Total" onclick="calcularTotal()" />
                         
-                         <input class="boton" type="button" id="eliminarPed" name="eliminarPed" value="Eliminar Pedido" onclick="eliminarPedido(<%=usuario.getCodigo_usu()%>)"/>
-						 <div id="informacion2"><b>Verificacion de eliminado</b></div>
+                        <br>
+                        <br>
+                        <input class="boton" type="button" id="requerModificado" name="requerimientoModificado" value="Guardar Modificacion" onclick="actualizarPedido()" />
+                        <input class="boton" type="button" id="eliminarPed" name="eliminarPed" value="Eliminar Pedido" onclick="eliminarPedido(<%=usuario.getCodigo_usu()%>)"/>
+						 
+						 <div id="informacion2"><b>Verificacion</b></div>
                         
                     </form>
                 </section>

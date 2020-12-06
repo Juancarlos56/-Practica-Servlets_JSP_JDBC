@@ -110,7 +110,7 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 	@Override
 	public void delete(Pedido pedido) {
 		
-		jdbc.update("DELETE FROM Pedido WHERE cod_ped = " + pedido.getCodigo_pedido());
+		jdbc.update("DELETE FROM Pedido WHERE (cod_ped = " + pedido.getCodigo_pedido()+") AND cod_usuario="+pedido.getUsuario().getCodigo_usu());
 	}
 
 	@Override
@@ -151,6 +151,45 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 				
 	}
 
+	@Override
+	public ArrayList<Pedido> findByUsuarioPedidosCodigoTodos(Integer codigo_usu) {
+		
+		
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		Usuario usu = DAOFactory.getFactory().getUsuario_DAO().read(codigo_usu);
+		Producto pro = null;
+		ArrayList<String> productos = new ArrayList<String>();
+		
+		int c,p;
+		ResultSet rp = jdbc.query("SELECT p.cod_ped, p.estado, p.cantidad, p.total, p.cod_usuario, p.cod_producto \r\n"
+				+ "	FROM Pedido p \r\n"
+				+ "	WHERE (p.cod_usuario = "+codigo_usu);
+		 
+			try {
+				if (rp != null ) {
+					while (rp.next()) {
+					
+					
+						Pedido pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"), rp.getInt("p.cod_usuario"), rp.getInt("p.cod_producto"));
+						pedidos.add(pedido);
+					}
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println(">>>WARNING (PedidoDAO):"+e.getMessage());
+				System.out.println("Sucedio un problema al buscar los pedidos de un usuario");
+			}
+			
+			
+			
+			
+		return pedidos;
+				
+				
+	}
+
+	
 	@Override
 	public void createArrayList(ArrayList<Pedido> entity) {
 		// TODO Auto-generated method stub

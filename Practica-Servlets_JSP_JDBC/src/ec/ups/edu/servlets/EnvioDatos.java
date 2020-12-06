@@ -39,10 +39,11 @@ public class EnvioDatos extends HttpServlet {
 		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
 		String pagina = request.getParameter("pagina");
 		
-		//ArrayList<Producto> producto = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nombrePro, idEmpresa);
+		System.out.println("Este es el idUsu: "+idUsuario+" esta es la empresa: "+idEmpresa);
 		Usuario usuario = DAOFactory.getFactory().getUsuario_DAO().read(idUsuario);
 		Empresa empresa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
-		//System.out.println("Producto en Servlet: "+producto.size());
+		System.out.println("Esto es el objeto usuario: "+usuario.getNombre()+" esta es la empresa "+empresa.getNombre());
+		
 		
 		String url = "/private/user/jsp/"+pagina;
 		System.out.println("Pagina: "+url);

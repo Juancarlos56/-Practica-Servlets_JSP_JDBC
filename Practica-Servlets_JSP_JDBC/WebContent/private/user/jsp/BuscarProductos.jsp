@@ -17,7 +17,6 @@
 </head>
 <body  background="image/regPedido.png">
 
-	 <div class="cuadrado">
 
 	 <div class="cuerpo">
 

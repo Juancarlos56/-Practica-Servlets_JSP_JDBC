@@ -37,7 +37,7 @@ public class listarPedido extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		System.out.print("ESTOY EN EL SERVLET DE MODIFICAR PEDIDO ");
+		System.out.print("ESTOY EN EL SERVLET DE Listar PEDIDO ");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Empresa empresa = null;
@@ -48,11 +48,21 @@ public class listarPedido extends HttpServlet {
 
 		
 		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
+		
+		for (Pedido pedido : pedidos) {
+			pedido.setUsuario(DAOFactory.getFactory().getUsuario_DAO().read(pedido.getCodUsu()));
+		}
+		
+		for (Pedido pedido : pedidos) {
+			pedido.setProducto(DAOFactory.getFactory().getProducto_DAO().read(pedido.getCodPro()));
+		}
+		
 		System.out.println(pedidos.size());
 		String tablaDatos="";
 		String tablaIndex = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
 				"<tr>"+
 					"<th class='tg-46ru'>Nombre del Producto</th>"+
+					"<th class='tg-46ru'>Nombre del Usuario</th>"+
 					"<th class='tg-46ru'>Cantidad Pedida</th>"+
 					"<th class='tg-46ru'>Precio por Unidad</th>"+
 					"<th class='tg-46ru'>Estado del Pedido</th>"+
@@ -65,6 +75,7 @@ public class listarPedido extends HttpServlet {
 				
 				tablaDatos = tablaDatos + "<tr>"+
 						"<td>"+ped.getProducto().getNombre()+"</td>"+
+						"<td>"+ped.getUsuario().getNombre()+"</td>"+
 						"<td>"+ped.getCantidad()+"</td>"+
 						"<td>"+ped.getProducto().getPrecio()+"</td>"+
 						"<td>"+ped.getEstado()+"</td>"+

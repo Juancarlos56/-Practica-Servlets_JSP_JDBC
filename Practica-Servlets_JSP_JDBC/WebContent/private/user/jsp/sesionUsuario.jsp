@@ -20,9 +20,6 @@
 </head>
 <body background="image/sesionUsu.png">
 
-	<c:set var="pro" scope="request" value="${producto}" />
-	
-	
 	<%
 		HttpSession login = request.getSession();
 		Empresa empresa = null;

@@ -23,7 +23,7 @@
 	 	Pedido pedido = (Pedido)request.getAttribute("pedido");
 	 	%>
 	 	
-		<h1> Listar Pedidos de la Empresa <%=empresa.getNombre()%> </h1>
+		<h1> Listar Pedidos de <%=usuario.getNombre()%> para la Empresa <%=empresa.getNombre()%> </h1>
 		
                     <br>
                     <br>
@@ -33,10 +33,6 @@
 				<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
 		        <div class="separador"> </div>
 		        <div id="informacion"><b>Lista de Pedidos</b></div>
-						<br>
-						
-					
-              
 	</section>
 
 

@@ -2,7 +2,6 @@ package ec.ups.edu.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ec.ups.edu.dao.DAOFactory;
-import ec.ups.edu.modelo.Empresa;
+import ec.ups.edu.modelo.Pedido;
 import ec.ups.edu.modelo.Producto;
+import ec.ups.edu.modelo.Usuario;
 
 /**
- * Servlet implementation class BuscarProducto
+ * Servlet implementation class ActualizarPedido
  */
-@WebServlet("/BuscarProducto")
-public class BuscarProducto extends HttpServlet {
+@WebServlet("/ActualizarPedido")
+public class ActualizarPedido extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuscarProducto() {
+    public ActualizarPedido() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +35,19 @@ public class BuscarProducto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		Pedido pedido=null;
 		
-		String nomPro = request.getParameter("nomPro");
-		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
-		Empresa empresa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
+		int codPedido =  Integer.parseInt(request.getParameter("codPedido"));
+		int cantidad =  Integer.parseInt(request.getParameter("cantidad"));
+		double total =  Double.parseDouble(request.getParameter("total"));
 		
-		System.out.println("Este es el nombre: "+nomPro+" esta es la empresa: "+idEmpresa);
-		System.out.println("Esta es la empresa "+empresa.getNombre());
+		pedido = DAOFactory.getFactory().getPedido_DAO().read(codPedido);
+		pedido.setCantidad(cantidad);
+		pedido.setTotal(total);
 		
-		
-		ArrayList<Producto> pro = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nomPro, idEmpresa);
-		
-		String url = "/private/user/jsp/mostrarProductos.jsp";
-		request.setAttribute("productos", pro);
-		request.setAttribute("empresaBusca", empresa);
-		request.getRequestDispatcher(url).forward(request, response);
-		System.out.println("Busqueda de producto pasado");
+		DAOFactory.getFactory().getPedido_DAO().update(pedido);
+		out.println("<h3>Se modifico el pedido, click en listar para ver el cambio</h3>");
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ec.ups.edu.dao.DAOFactory;
+import ec.ups.edu.modelo.Pedido;
 import ec.ups.edu.modelo.Producto;
 import ec.ups.edu.modelo.Usuario;
 
@@ -31,19 +33,16 @@ public class EliminarPed extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		Producto prod = null;
-		Usuario us = null;
+		Pedido pedido=null;
 		
-		int usu =  Integer.parseInt(request.getParameter("idUsu"));
-		int ped =  Integer.parseInt(request.getParameter("codPed"));
-		String nomPro = request.getParameter("nombrePed");
-		String estadoPed = request.getParameter("estadoPed");
-		double tt =  Double.parseDouble(request.getParameter("totalPed"));
+		int codPedido =  Integer.parseInt(request.getParameter("codPedido"));
+		
+		pedido = DAOFactory.getFactory().getPedido_DAO().read(codPedido);
+		
+		DAOFactory.getFactory().getPedido_DAO().delete(pedido);
+		out.println("<h3>Se elimino el pedido, click en listar para ver el cambio</h3>");
 		
 		
 	}

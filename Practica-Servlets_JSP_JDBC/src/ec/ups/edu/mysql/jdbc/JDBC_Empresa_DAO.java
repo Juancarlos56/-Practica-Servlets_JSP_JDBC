@@ -183,9 +183,12 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 		Producto p = null;
 		
 		System.out.println("Nombre producto: "+nombreProducto+" id Empresa: "+idEmpresa);
-		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion, e.cod_emp \r\n"
-				+ "            FROM Producto p, Empresa e \r\n"
-				+ "            WHERE (p.nombre LIKE '%"+nombreProducto+"%') AND (e.cod_emp = "+idEmpresa+")\r\n"
+		
+		
+		
+		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion \r\n"
+				+ "            FROM Producto p, Categoria c, Empresa e \r\n"
+				+ "            WHERE p.nombre LIKE '%"+nombreProducto+"%' AND c.cod_cat = p.cod_categoria AND c.cod_empresa = "+idEmpresa+" AND e.cod_emp = "+idEmpresa+"\r\n"
 				+ "");
 		
 		try {
