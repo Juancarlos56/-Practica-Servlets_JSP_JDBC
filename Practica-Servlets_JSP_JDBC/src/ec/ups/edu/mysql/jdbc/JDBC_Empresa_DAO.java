@@ -193,7 +193,6 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 		
 		try {
 			if (pe != null) {
-				System.out.println("Pasooooooooooo");
 				while (pe.next()) {
 					System.out.println("Aquiiiiii.....");
 					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"));
