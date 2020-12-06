@@ -119,7 +119,8 @@
              		<a href="<%=url2%>"><h2>Modificar Pedido</h2></a>
               	</li>
               	<li style="border-bottom-style: inset;"> 
-              		<a href="listarPedido.jsp"><h2>Listar Pedido</h2></a>
+              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos?idUsuario=" + us.getCodigo_usu() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=listarPedido.jsp";%>
+             		<a href="<%=url3%>"><h2>Listar Pedido</h2></a>
               	</li>
               
           </nav>

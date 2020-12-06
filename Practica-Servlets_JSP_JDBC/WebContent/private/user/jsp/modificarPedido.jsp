@@ -57,6 +57,10 @@
                         <br>
                         <br>
                         <input class="boton" type="submit" id="requerModificado" name="requerimientoModificado" value="Guardar Modificacion" />
+                        
+                         <input class="boton" type="button" id="eliminarPed" name="eliminarPed" value="Eliminar Pedido" onclick="eliminarPedido(<%=usuario.getCodigo_usu()%>)"/>
+						 <div id="informacion2"><b>Verificacion de eliminado</b></div>
+                        
                     </form>
                 </section>
 
