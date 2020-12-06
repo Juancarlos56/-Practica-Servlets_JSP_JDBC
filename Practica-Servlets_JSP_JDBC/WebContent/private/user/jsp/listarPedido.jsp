@@ -35,7 +35,8 @@
 		        <div id="informacion"><b>Lista de Pedidos</b></div>
 						<br>
 						
-					
+				
+				
               
 	</section>
 

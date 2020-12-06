@@ -18,24 +18,27 @@
     <script src="./js/funAdmin.js" type="text/javascript"></script>
 	<title>SesionUsuario</title>
 </head>
-<body>
+<body  background="image/sesionUsu.png">
+	<c:set var="pro" scope="request" value="${producto}" />
 
 		<%
 			HttpSession login = request.getSession();
 			Administrador adm = null;
+			Empresa empresa = null;
 			if (login.getAttribute("admin") != null){
 				String autentificacion = login.getAttribute("admin").toString();
 				if (autentificacion.equals("admin") == false){
 					session.invalidate();
-				    response.sendRedirect("index.html");
+				    response.sendRedirect("publico/index.html");
 				    return;
 				}else{
 					adm = (Administrador)request.getAttribute("admin");
 					Empresa_DAO emp = DAOFactory.getFactory().getEmpresa_DAO();
-					Empresa e = emp.empresa_de_un_admin(adm);
+					empresa = emp.empresa_de_un_admin(adm);
 				}
+				
 			}else{
-				response.sendRedirect("index.html");
+				response.sendRedirect("publico/index.html");
 			}
 		%>
 		
@@ -44,67 +47,47 @@
             <div class="encabezado">
 
                 <div class="encabezado1">
-                    <a href="index.html" title="Ir a la Pagina principal"> <img src="imagenes/LogoPidelo.png" width="200px" height="175px" alt="Logo"> </a>
+                    <a href="publico/index.html" title="Ir a la Pagina principal"> <img src="image/Logo2.png" width="200px" height="175px" alt="Logo"> </a>
                 </div>
 
                 <div class="encabezado2">
 
-                    <div id="menu" class="menu">
-                    	 <h1>Bienvenido de nuevo <%  
-					                    	 try{
-					     						if (adm != null) {
-					     							out.println(adm.getNombre());
-					         					}	
-					     					}catch(NullPointerException e){
-					     						response.sendRedirect("index.html");
-					     					}
-                    	 				%>  
-                    	 </h1>
-                        <nav>
-                            <ol>
-                                <li>
-                                    <a href="registrarReq.html">
-                                        <h2>Registrar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="modificarReq.html">
-                                        <h2>Modificar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="eliminarReq.html">
-                                        <h2>Eliminar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="buscarReq.html">
-                                        <h2>Buscar</h2>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="listarReq.html">
-                                        <h2>Listar</h2>
-                                    </a>
-                                </li>
-                            </ol>
-                        </nav>
+       				 <div id="menu" class="menu">
+                        <h1 style="background-color: cadetblue;">Bienvenido <% 
+					                        try{
+                        						if (adm != null) {
+                            						out.println(adm.getNombre()); 
+                            					}	
+                        					}catch(NullPointerException e){
+                        						response.sendRedirect("publico/index.html");
+                        					}
+                        						
+                        					
+                        					%>  
+                        </h1>
+        				 <h2>Administracion de la empresa <% 
+               					try{
+               						if (adm != null) {
+                   						out.println(empresa.getNombre()); 
+                   					}	
+               					}catch(NullPointerException e){
+               						response.sendRedirect("publico/index.html");
+               					}			
+               					
+                        	%>  
+                        
+                        </h2>
+                        
                     </div>
-
-
                 </div>
 
                 <div class="encabezado3">
                     <div class="ingreUsuEncabezado3">
-                        <a href="iniciarSesion.html"> <img src="https://image.flaticon.com/icons/png/512/64/64572.png" width="50px" height="50px" alt="Acceder a la cuenta"></a>
-                        <h5>Acceder</h5>
+                        <a href="publico/index.html"> <img src="https://image.flaticon.com/icons/png/512/64/64572.png" width="50px" height="50px" alt="Acceder a la cuenta"></a>
+                        <h5>Salir</h5>
                     </div>
 
-                    <div class="agreUsuEncabezado3">
-                        <a href="crearCuenta.html"><img src="https://image.flaticon.com/icons/png/512/94/94979.png" width="50px" height=50px "" alt="Crear Cuenta"></a>
-                        <h5>Crear Cuenta</h5>
-                    </div>
-                </div>
+             
 
             </div>
 
@@ -117,18 +100,18 @@
          <nav>
          	
          		 <li style="border-bottom-style: inset;">
-          			 <% String url = "/Practica-Servlets_JSP_JDBC/EnvioDatos?idUsuario=" + us.getCodigo_usu() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=BuscarProductos.jsp";%>
-           			 <a href="<%=url%>"><h2>Registrar Pedido</h2></a>
+          			 <% String url = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=RegistrarPro.jsp";%>
+           			 <a href="<%=url%>"><h2>Registrar Productos</h2></a>
             	</li>
              	<li style="border-bottom-style: inset;">
-             		 <% String url2 = "/Practica-Servlets_JSP_JDBC/EnvioDatos?idUsuario=" + us.getCodigo_usu() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=modificarPedido.jsp";%>
-             		<a href="<%=url2%>"><h2>Modificar Pedido</h2></a>
-              	</li>
-              	<li style="border-bottom-style: inset;"> 
-              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos?idUsuario=" + us.getCodigo_usu() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=listarPedido.jsp";%>
-             		<a href="<%=url3%>"><h2>Listar Pedido</h2></a>
+             		 <% String url2 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=modificarPro.jsp";%>
+             		<a href="<%=url2%>"><h2>Modificar Producto</h2></a>
               	</li>
               
+              <li style="border-bottom-style: inset;"> 
+              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&aprobarPed.jsp";%>
+             		<a href="<%=url3%>"><h2>Aprobar Pedidos</h2></a>
+              	</li>
           </nav>
 
        </div>
