@@ -29,3 +29,16 @@ function listarPedido(idEmp, idUsuario) {
     }
     return false;
 }
+
+
+function mostrarPedido(codPedido,proNombre,pedEstado,pedCantidad,proPrecio,total) {
+    console.log("Estamos en modificar pedido");
+	document.getElementById("idTextpedido").value = codPedido;
+	document.getElementById("nomTextPro").value = proNombre;
+	document.getElementById("estadoTextPed").value = pedEstado;	
+	document.getElementById("numCantidadPed").value = pedCantidad;
+	document.getElementById("precioPro").value = proPrecio;
+	document.getElementById("total").value = total;	
+	
+}
+

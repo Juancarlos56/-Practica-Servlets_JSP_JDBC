@@ -116,44 +116,23 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 	@Override
 	public ArrayList<Pedido> findByUsuarioPedidosCodigo(Integer codigo_usu) {
 		
+		
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-		Usuario usu = null;
+		Usuario usu = DAOFactory.getFactory().getUsuario_DAO().read(codigo_usu);
 		Producto pro = null;
 		ArrayList<String> productos = new ArrayList<String>();
 		
 		int c,p;
 		ResultSet rp = jdbc.query("SELECT p.cod_ped, p.estado, p.cantidad, p.total, p.cod_usuario, p.cod_producto \r\n"
 				+ "	FROM Pedido p \r\n"
-				+ "	WHERE p.cod_usuario = "+codigo_usu);
+				+ "	WHERE (p.cod_usuario = "+codigo_usu+") AND (p.estado like 'Pendiente')");
 		 
 			try {
-				while (rp.next()) {
+				if (rp != null ) {
+					while (rp.next()) {
 					
-					if (rp != null ) {
-						Pedido pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"));
-						c = rp.getInt("p.cod_usuario");
-						p = rp.getInt("p.cod_producto");
-						ResultSet rp2 = jdbc.query("SELECT  * FROM Producto WHERE cod_pro="+p);
-						ResultSet rp3 = jdbc.query("SELECT * FROM Usuario WHERE cod_usu="+codigo_usu);
-						
-						if(rp2 != null && rp2.next()&& rp3 != null && rp3.next()) {
-							
-							
-							//Cambiar por los atributos de la tabla usuario... 
-							//Metodo constructor del Usuario, contiene los atributos y hereda de persona
-							Producto p2= new Producto(rp2.getInt("cod_pro"), rp2.getString("nombre"), rp2.getDouble("precio")
-									, rp2.getInt("porcentajeIva"), rp2.getString("url_imagen"), rp2.getString("descripcion"));
-							
-							Usuario u = new Usuario(rp3.getInt("cod_usu"), rp3.getString("correo"), rp3.getString("password")
-									, rp3.getString("nombre"), rp3.getString("rol"));
-							
-							pedido.setProducto(p2);
-							pedido.setUsuario(u);
-							
-						}
-						
-						
-						System.out.println(pedido.toString());
+					
+						Pedido pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"), rp.getInt("p.cod_usuario"), rp.getInt("p.cod_producto"));
 						pedidos.add(pedido);
 					}
 					

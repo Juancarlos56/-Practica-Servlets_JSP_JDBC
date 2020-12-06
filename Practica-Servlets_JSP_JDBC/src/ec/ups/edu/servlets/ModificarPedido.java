@@ -48,6 +48,15 @@ public class ModificarPedido extends HttpServlet {
 
 		
 		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
+		
+		for (Pedido pedido : pedidos) {
+			pedido.setUsuario(DAOFactory.getFactory().getUsuario_DAO().read(pedido.getCodUsu()));
+		}
+		
+		for (Pedido pedido : pedidos) {
+			pedido.setProducto(DAOFactory.getFactory().getProducto_DAO().read(pedido.getCodPro()));
+		}
+		
 		System.out.println(pedidos.size());
 		String tablaDatos="";
 		String tablaIndex = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
@@ -69,6 +78,7 @@ public class ModificarPedido extends HttpServlet {
 						"<td>"+ped.getProducto().getPrecio()+"</td>"+
 						"<td>"+ped.getEstado()+"</td>"+
 						"<td>"+ped.getTotal()+"</td>"+
+						"<td><input type='button' id='pedidoSe' name='pedidoSe' value='Seleccionar' onclick='mostrarPedido("+ped.getCodigo_pedido()+",\""+ped.getProducto().getNombre()+"\",\""+ped.getEstado()+"\","+ped.getCantidad()+","+ped.getProducto().getPrecio()+","+ped.getTotal()+")'></td>"+
 						"</tr>";	
 			}
 			

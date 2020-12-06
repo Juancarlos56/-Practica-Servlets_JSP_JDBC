@@ -52,6 +52,10 @@
                         <input class="sepBot" type="number" id="numCantidadPed" name="numCantidadPed" value="" />
                         <br>
                         <br>
+                        <label for="precio" id="precio" name="precio">Precio</label>
+                        <input class="sepBot" type="number" id="precioPro" name="precioPro" value="0" readonly />
+                        <br>
+                        <br>
                         <label for="totalPedido" id="totalPedido" name="totalPedido">Total</label>
                         <input class="sepBot" type="number" id="total" name="total" value="0" readonly />
                         <br>

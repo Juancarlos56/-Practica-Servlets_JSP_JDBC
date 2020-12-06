@@ -14,6 +14,8 @@ public class Pedido implements Serializable{
 	private Double total;
 	private Producto producto;
 	private Usuario usuario;
+	private int codUsu;
+	private int codPro;
 	
 	public Pedido() {
 		producto = new Producto();
@@ -35,14 +37,39 @@ public class Pedido implements Serializable{
 	
 	
 	
-	public Pedido(int codigo_pedido, String estado, int cantidad, Double total, Producto producto, Usuario usuario) {
+	public Pedido(int codigo_pedido, String estado, int cantidad, Double total, int producto, int usuario) {
 		super();
 		this.codigo_pedido = codigo_pedido;
 		this.estado = estado;
 		this.cantidad = cantidad;
 		this.total = total;
-		this.producto = producto;
-		this.usuario = usuario;
+		this.codUsu = producto;
+		this.codPro = usuario;
+	}
+
+	
+
+
+	public int getCodUsu() {
+		return codUsu;
+	}
+
+
+
+	public void setCodUsu(int codUsu) {
+		this.codUsu = codUsu;
+	}
+
+
+
+	public int getCodPro() {
+		return codPro;
+	}
+
+
+
+	public void setCodPro(int codPro) {
+		this.codPro = codPro;
 	}
 
 

@@ -68,15 +68,15 @@ public class JDBC_Usuario_DAO extends JDBCGenericDAO<Usuario, Integer> implement
 		Usuario u =  null;
 		
 		//Aqui pon el query John para la lectura de usuarios... 
-		ResultSet rs = jdbc.query("SELECT * FROM Usuario WHERE cod_usu="+id);
+		ResultSet rsu = jdbc.query("SELECT * FROM Usuario WHERE cod_usu="+id);
 		
 		try {
-			if(rs != null && rs.next()) {
+			if(rsu != null && rsu.next()) {
 				
 				//Cambiar por los atributos de la tabla usuario... 
 				//Metodo constructor del Usuario, contiene los atributos y hereda de persona
-				u = new Usuario(rs.getInt("cod_usu"), rs.getString("correo"), rs.getString("password")
-						, rs.getString("nombre"), rs.getString("rol"));
+				u = new Usuario(rsu.getInt("cod_usu"), rsu.getString("correo"), rsu.getString("password")
+						, rsu.getString("nombre"), rsu.getString("rol"));
 				
 			}
 		}catch(SQLException e) {
