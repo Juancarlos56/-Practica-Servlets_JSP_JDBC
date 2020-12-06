@@ -28,11 +28,10 @@
                     <br>
                     
                     
-                <label id="nomProducto" for="nomProducto" style="margin-right: 50px;" >Ingresar Nombre Producto</label>
-				<input type="text" id="nomPro" name="nomPro" value="" placeholder="Nombre producto ..." onkeyup="buscarModificarProducto(<%=empresa.getCodigo_empresa()%>);"/>
-				<input type="button" id="buscarPro" name="buscarPro" value="Buscar" onclick="buscarModificarProducto(<%=empresa.getCodigo_empresa()%>);" />            
+                <label id="nomProducto" for="nomProducto" style="margin-right: 50px;" >Listar Pedidos</label>
+				<input type="button" id="listaPed" name="listarPed" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
 		        <div class="separador"> </div>
-		        <div id="informacion"><b>Busqueda de productos</b></div>
+		        <div id="informacion"><b>Lista de Pedidos</b></div>
 						<br>
 						<br>
 						
