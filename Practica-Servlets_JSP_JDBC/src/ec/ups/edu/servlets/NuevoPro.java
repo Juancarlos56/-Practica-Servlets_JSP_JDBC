@@ -59,7 +59,7 @@ public class NuevoPro extends HttpServlet {
 		
 	
 		DAOFactory.getFactory().getProducto_DAO().create(p);
-		out.println("<h3>El pedido ha sido creado</h3>");
+		out.println("<h3>El pedido ha sido creado </h3>");
 		
 		
 	}
