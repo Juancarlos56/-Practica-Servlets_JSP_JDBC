@@ -42,9 +42,7 @@ public class ModificarPedido extends HttpServlet {
 		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
 		int emp =  Integer.parseInt(request.getParameter("idEmp"));
 
-		//empresa = DAOFactory.getFactory().getEmpresa_DAO().read(emp);
-		//usuario = DAOFactory.getFactory().getUsuario_DAO().read(usu);
-
+		
 		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
 
 		String tablaDatos="";
