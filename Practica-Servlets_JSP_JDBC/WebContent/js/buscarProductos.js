@@ -60,7 +60,7 @@ function buscarProducto(idEmp) {
 
 
 function mostrarProductos(codPro, nomPro, PrecioPro, iva) {
-    console.log("ivaaaaaaaaaaa: "+iva);
+    console.log("ivaaaaaa: "+iva);
 	document.getElementById("codPro").value = codPro;
 	document.getElementById("nombreProducto").value = nomPro;
 	document.getElementById("precioPr").value = PrecioPro;
