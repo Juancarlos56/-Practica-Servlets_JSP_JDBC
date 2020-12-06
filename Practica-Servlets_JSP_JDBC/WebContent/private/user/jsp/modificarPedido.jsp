@@ -48,7 +48,7 @@
                         <input class="sepBot" type="text" id="estadoTextPed" name="estadoTextPed" value="aqui va estado" readonly />
                         <br>
                         <br>
-                        <label for="cantidadPedido" id="cantidadPedido" name="cantidadPedido">Cantidad Pedido</label>
+                        <label for="cantidadPedido" id="cantidadPedido" name="cantidadPedido">Cantidad Pedido </label>
                         <input class="sepBot" type="number" id="numCantidadPed" name="numCantidadPed" value="" />
                         <br>
                         <br>
