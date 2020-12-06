@@ -40,7 +40,7 @@
                     <h2>Modificar Producto</h2>
                     <br>
                     <label for="MODnombrePro" id="MODnombrePro">Nombre:</label>
-                    <input class="sepBot" type="text" id="MODestadoPedido" name="MODestadoPedido" value="" />
+                    <input class="sepBot" type="text" id="MODnombreProd" name="MODnombreProd" value="" />
                     <br>
 
                     <label for="MODlabelpreProd" id="MODlabelpreProd"> Precio:</label>
