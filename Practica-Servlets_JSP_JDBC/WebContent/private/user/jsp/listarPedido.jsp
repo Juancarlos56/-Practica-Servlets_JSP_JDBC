@@ -33,7 +33,10 @@
 				<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
 		        <div class="separador"> </div>
 		        <div id="informacion"><b>Lista de Pedidos</b></div>
-	</section>
+						<br>
+						
+				
+		</section>
 
 
 

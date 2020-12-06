@@ -28,7 +28,7 @@
 			String autentificacion = login.getAttribute("usuario").toString();
 			if (autentificacion.equals("usuario") == false){
 				session.invalidate();
-			    response.sendRedirect("index.html");
+			    response.sendRedirect("publico/index.html");
 			    return;
 			}else{
 				
@@ -36,13 +36,13 @@
 					us = (Usuario)request.getAttribute("usuario");
 					empresa = (Empresa)request.getAttribute("emp");
 				}catch(NullPointerException e){
-					response.sendRedirect("index.html");
+					response.sendRedirect("publico/index.html");
 				}
 				
 				
 			}
 		}else{
-			response.sendRedirect("index.html");
+			response.sendRedirect("publico/index.html");
 		}
 		
 		
@@ -66,7 +66,7 @@
                             						out.println(us.getNombre()); 
                             					}	
                         					}catch(NullPointerException e){
-                        						response.sendRedirect("index.html");
+                        						response.sendRedirect("publico/index.html");
                         					}
                         						
                         					
@@ -78,7 +78,7 @@
                    						out.println(empresa.getNombre()); 
                    					}	
                					}catch(NullPointerException e){
-               						response.sendRedirect("index.html");
+               						response.sendRedirect("publico/index.html");
                					}			
                					
                         	%>  
