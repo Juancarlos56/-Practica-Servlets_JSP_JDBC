@@ -107,10 +107,21 @@
              		 <% String url2 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=modificarPro.jsp";%>
              		<a href="<%=url2%>"><h2>Modificar Producto</h2></a>
               	</li>
+              	
+              	<li style="border-bottom-style: inset;">
+             		 <% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=listarPro.jsp";%>
+             		<a href="<%=url3%>"><h2>Listar Productos</h2></a>
+              	</li>
               
               <li style="border-bottom-style: inset;"> 
-              		<% String url3 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&aprobarPed.jsp";%>
-             		<a href="<%=url3%>"><h2>Aprobar Pedidos</h2></a>
+              		<% String url4 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=aprobarPed.jsp";%>
+             		<a href="<%=url4%>"><h2>Aprobar Pedidos</h2></a>
+              	</li>
+              	
+              	
+              	<li style="border-bottom-style: inset;">
+             		 <% String url5 = "/Practica-Servlets_JSP_JDBC/EnvioDatos2?idAdmin=" + adm.getCodigo_admin() +"&idEmp="+empresa.getCodigo_empresa()+"&pagina=listarPed.jsp";%>
+             		<a href="<%=url5%>"><h2>Listar Pedidos</h2></a>
               	</li>
           </nav>
 
