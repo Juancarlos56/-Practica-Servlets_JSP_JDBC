@@ -22,7 +22,7 @@
 	 	Empresa empresa = (Empresa)request.getAttribute("empresa");
 	 	%>
 	 	
-		<h1> Modificar Pedidos de la Empresa <%=empresa.getNombre()%> </h1>
+		<h1> Modificar Pedidos de la Empresa<%=empresa.getNombre()%> </h1>
 		
                     <br>
                     <br>
