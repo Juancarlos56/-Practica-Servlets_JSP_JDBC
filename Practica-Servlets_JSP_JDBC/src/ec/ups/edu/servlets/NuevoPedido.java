@@ -38,74 +38,55 @@ public class NuevoPedido extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		Producto prod = null;
-		Usuario us = null;
+		Empresa empresa = null;
+		Usuario usuario = null;
 		
 		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
-		int pro =  Integer.parseInt(request.getParameter("codPro"));
-		int ca =  Integer.parseInt(request.getParameter("cantidad"));
-		double tt =  Double.parseDouble(request.getParameter("total"));
+		int emp =  Integer.parseInt(request.getParameter("idEmp"));
 		
-		Pedido pedidoUsuario = new Pedido(1, "Pendiente", ca, tt);
-		us = DAOFactory.getFactory().getUsuario_DAO().read(usu);
-		prod = DAOFactory.getFactory().getProducto_DAO().read(pro);
-		pedidoUsuario.setUsuario(us);
-		pedidoUsuario.setProducto(prod);
+		//empresa = DAOFactory.getFactory().getEmpresa_DAO().read(emp);
+		//usuario = DAOFactory.getFactory().getUsuario_DAO().read(usu);
 		
-		DAOFactory.getFactory().getPedido_DAO().create(pedidoUsuario);
-		out.println("<h3>El pedido ha sido creado</h3>");
-	}
+		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
+		
+		String tablaDatos="";
+		String tablaIndex = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
+				"<tr>"+
+					"<th class='tg-46ru'>Nombre del Producto</th>"+
+				    "<th class='tg-46ru'>Cantidad Pedida</th>"+
+				    "<th class='tg-46ru'>Precio por Unidad</th>"+
+				    "<th class='tg-46ru'>Estado del Pedido</th>"+
+				    "<th class='tg-46ru'>Total</th>"+
+				"</tr>";
+		if(pedidos !=null){
+			
+			for (int i=0;i<pedidos.size();i++){
+				Pedido ped=pedidos.get(i);
+				
+				tablaDatos = tablaDatos + "<tr>"+
+						"<td>"+ped.getProducto().getNombre()+"</td>"+
+						"<td>"+ped.getCantidad()+"</td>"+
+					    "<td>"+ped.getProducto().getPrecio()+"</td>"+
+					    "<td>"+ped.getEstado()+"</td>"+
+					    "<td>"+ped.getTotal()+"</td>"+
+					    "</tr>";	
+		   	}
+			
+			tablaDatos = tablaDatos + "</table> ";
+				
+		}
+		
+		tablaIndex = tablaIndex + tablaDatos;
+		out.println(tablaIndex);
+}
+
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		Producto prod = null;
-		Usuario us = null;
-		
-		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
-		int pro =  Integer.parseInt(request.getParameter("codPro"));
-		int ca =  Integer.parseInt(request.getParameter("cantidad"));
-		double tt =  Double.parseDouble(request.getParameter("total"));
-		
-		Pedido pedidoUsuario = new Pedido(1, "Pendiente", ca, tt);
-		us = DAOFactory.getFactory().getUsuario_DAO().read(usu);
-		prod = DAOFactory.getFactory().getProducto_DAO().read(pro);
-		pedidoUsuario.setUsuario(us);
-		pedidoUsuario.setProducto(prod);
-		
-		DAOFactory.getFactory().getPedido_DAO().create(pedidoUsuario);
-		out.println("<h3>El pedido ha sido creado</h3>");
-		ArrayList<Pedido> pedido = DAOFactory.getFactory().getPedido_DAO().findArrayList();
-		
-		String t = "<table class='tg' id='tablaBuscar' style='width:95%'>"+
-				"<tr>"+
-					"<th class='tg-46ru'>Codigo</th>"+
-				    "<th class='tg-46ru'>Nombre</th>"+
-				    "<th class='tg-46ru'>Precio</th>"+
-				    "<th class='tg-46ru'>Iva</th>"+
-				    "<th class='tg-46ru'>Descripcion</th>"+
-				    "<th class='tg-46ru'>Imagen</th>"+
-				"</tr>";
-				
-		if(pedido !=null){
-			
-			for (int i=0;i<pedido.size();i++){
-				Pedido ped=pedido.get(i);
-			//<tr>
-						<td><%=producto.getCodigo_pro()%></td>
-						<td><%=producto.getNombre()%></td>
-					    <td><%=producto.getPrecio()%></td>
-					    <td><%=producto.getIva()%></td>
-					    <td><%=producto.getDescripcion()%></td>
-					    <td><img src='<%=producto.getUrl_imagen()%>' width='200px' height='175px'></td>
-					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarProductos(<%=producto.getCodigo_pro()%>,'<%=producto.getNombre()%>',<%=producto.getPrecio()%>)"></td>
-				</tr>			 
-		   	<% }
-		}
 		
 	}
-
+		
 }

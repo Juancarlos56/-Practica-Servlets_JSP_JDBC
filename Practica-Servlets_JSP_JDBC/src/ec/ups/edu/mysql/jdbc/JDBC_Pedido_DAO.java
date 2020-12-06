@@ -115,8 +115,39 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 
 	@Override
 	public ArrayList<Pedido> findByUsuarioPedidosCodigo(Integer codigo_usu) {
-				return null;
+		
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		Pedido pedido = null;
+		Usuario usu = null;
+		Producto pro = null;
+		int c,p;
+		ResultSet rp = jdbc.query("SELECT  p.cod_ped, p.estado, p.cantidad, p.total, p.cod_usuario, p.cod_producto \r\n"
+				+ "	FROM Pedido p \r\n"
+				+ "	WHERE p.cod_usuario = "+codigo_usu+";");
+			
+		if (rp != null) {
+			try {
+				while (rp.next()) {
+					pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"));
+					c = rp.getInt("p.cod_usuario");
+					p = rp.getInt("p.cod_producto");
+					usu = DAOFactory.getFactory().getUsuario_DAO().read(c);
+					pro = DAOFactory.getFactory().getProducto_DAO().read(p);
+					pedido.setUsuario(usu);
+					pedido.setProducto(pro);
+					pedidos.add(pedido);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Sucedio un problema al buscar los pedidos de un usuario");
 			}
+		}
+		
+			
+		return pedidos;
+				
+				
+	}
 
 	@Override
 	public void createArrayList(ArrayList<Pedido> entity) {
