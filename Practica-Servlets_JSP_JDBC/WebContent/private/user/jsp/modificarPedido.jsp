@@ -18,7 +18,7 @@
 <section class="cuadrado">
 
 		<% 
-	 	Usuario usuario = (Usuario)request.getAttribute("usuario");
+	 	Usuario usuario= (Usuario)request.getAttribute("usuario");
 	 	Empresa empresa = (Empresa)request.getAttribute("empresa");
 	 	%>
 	 	
