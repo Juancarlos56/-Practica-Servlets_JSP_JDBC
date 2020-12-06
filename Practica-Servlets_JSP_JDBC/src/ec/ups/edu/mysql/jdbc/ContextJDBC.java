@@ -11,7 +11,7 @@ public class ContextJDBC {
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/jee?serverTimezone=UTC";
 	private static final String USER = "root";
-	private static final String PASS = "5665";
+	private static final String PASS = "1234";
 	
 	private static ContextJDBC jdbc = null;
 	private Statement statement = null;

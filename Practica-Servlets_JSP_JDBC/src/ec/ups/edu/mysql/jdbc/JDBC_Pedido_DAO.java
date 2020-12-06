@@ -117,32 +117,55 @@ public class JDBC_Pedido_DAO extends JDBCGenericDAO<Pedido, Integer> implements 
 	public ArrayList<Pedido> findByUsuarioPedidosCodigo(Integer codigo_usu) {
 		
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-		Pedido pedido = null;
 		Usuario usu = null;
 		Producto pro = null;
+		ArrayList<String> productos = new ArrayList<String>();
+		
 		int c,p;
-		ResultSet rp = jdbc.query("SELECT  p.cod_ped, p.estado, p.cantidad, p.total, p.cod_usuario, p.cod_producto \r\n"
+		ResultSet rp = jdbc.query("SELECT p.cod_ped, p.estado, p.cantidad, p.total, p.cod_usuario, p.cod_producto \r\n"
 				+ "	FROM Pedido p \r\n"
-				+ "	WHERE p.cod_usuario = "+codigo_usu+";");
-			
-		if (rp != null) {
+				+ "	WHERE p.cod_usuario = "+codigo_usu);
+		 
 			try {
 				while (rp.next()) {
-					pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"));
-					c = rp.getInt("p.cod_usuario");
-					p = rp.getInt("p.cod_producto");
-					usu = DAOFactory.getFactory().getUsuario_DAO().read(c);
-					pro = DAOFactory.getFactory().getProducto_DAO().read(p);
-					pedido.setUsuario(usu);
-					pedido.setProducto(pro);
-					pedidos.add(pedido);
+					
+					if (rp != null ) {
+						Pedido pedido = new Pedido(rp.getInt("p.cod_ped"), rp.getString("p.estado"), rp.getInt("p.cantidad"), rp.getDouble("p.total"));
+						c = rp.getInt("p.cod_usuario");
+						p = rp.getInt("p.cod_producto");
+						ResultSet rp2 = jdbc.query("SELECT * FROM Producto WHERE cod_pro="+p);
+						ResultSet rp3 = jdbc.query("SELECT * FROM Usuario WHERE cod_usu="+codigo_usu);
+						
+						if(rp2 != null && rp2.next()&& rp3 != null && rp3.next()) {
+							
+							
+							//Cambiar por los atributos de la tabla usuario... 
+							//Metodo constructor del Usuario, contiene los atributos y hereda de persona
+							Producto p2= new Producto(rp2.getInt("cod_pro"), rp2.getString("nombre"), rp2.getDouble("precio")
+									, rp2.getInt("porcentajeIva"), rp2.getString("url_imagen"), rp2.getString("descripcion"));
+							
+							Usuario u = new Usuario(rp3.getInt("cod_usu"), rp3.getString("correo"), rp3.getString("password")
+									, rp3.getString("nombre"), rp3.getString("rol"));
+							
+							pedido.setProducto(p2);
+							pedido.setUsuario(u);
+							
+						}
+						
+						
+						System.out.println(pedido.toString());
+						pedidos.add(pedido);
+					}
+					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println(">>>WARNING (PedidoDAO):"+e.getMessage());
 				System.out.println("Sucedio un problema al buscar los pedidos de un usuario");
 			}
-		}
-		
+			
+			
+			
 			
 		return pedidos;
 				
