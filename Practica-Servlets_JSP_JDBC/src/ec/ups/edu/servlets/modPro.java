@@ -14,16 +14,16 @@ import ec.ups.edu.modelo.Pedido;
 import ec.ups.edu.modelo.Producto;
 
 /**
- * Servlet implementation class EliminarPro
+ * Servlet implementation class modPro
  */
-@WebServlet("/EliminarPro")
-public class EliminarPro extends HttpServlet {
+@WebServlet("/modPro")
+public class modPro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EliminarPro() {
+    public modPro() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,13 +36,24 @@ public class EliminarPro extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Producto producto=null;
 		
+		
 		int codPro =  Integer.parseInt(request.getParameter("codPro"));
+		String nomPro = request.getParameter("nomPro");
+		double precioPro =  Double.parseDouble(request.getParameter("precioPro"));
+		int iva =  Integer.parseInt(request.getParameter("iva"));
+		String estPro =  request.getParameter("estPro");
+		String urlPro = request.getParameter("urlPro");
+		String descriPro =  request.getParameter("descriPro");
 		
 		producto = DAOFactory.getFactory().getProducto_DAO().read(codPro);
-		producto.setEstado("Inactivo");
-		DAOFactory.getFactory().getProducto_DAO().update(producto);
+		producto.setNombre(nomPro);
+		producto.setPrecio(precioPro);
+		producto.setEstado(estPro);
+		producto.setUrl_imagen(urlPro);
+		producto.setDescripcion(descriPro);
 		
-		out.println("<h3>El producto paso a inactivo, click en listar para ver el cambio</h3>");
+		DAOFactory.getFactory().getProducto_DAO().update(producto);
+		out.println("<h3>Se modifico el pedido, click en buscar para ver el cambio</h3>");
 	}
 
 	/**

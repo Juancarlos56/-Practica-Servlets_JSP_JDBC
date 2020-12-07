@@ -13,13 +13,13 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 	public void createTable() {
 		jdbc.update("DROP TABLE IF EXISTS Administrador");
 		jdbc.update("CREATE TABLE Administrador(\r\n"
-					+ "cod_admin int AUTO_INCREMENT,\r\n"
+					+ "cod_amd int AUTO_INCREMENT,\r\n"
 					+ "correo varchar(100) not null,\r\n"
 					+ "password varchar(50) not null,\r\n"
 					+ "nombre varchar(100) not null,\r\n"
 					+ "rol varchar(10) not null,\r\n"
 					+ "cod_empresa int null,\r\n"
-					+ "PRIMARY KEY (cod_admin)\r\n"
+					+ "PRIMARY KEY (cod_amd)\r\n"
 					+ ")");
 	}
 
@@ -35,11 +35,11 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 	@Override
 	public Administrador read(Integer id) {
 		Administrador ad = null;
-		ResultSet rs = jdbc.query("SELECT * FROM Administrador WHERE cod_admin="+id);
+		ResultSet rs = jdbc.query("SELECT * FROM Administrador WHERE cod_amd="+id);
 		
 		try {
 			if (rs != null && rs.next()) {
-				ad = new Administrador(rs.getInt("cod_admin"), rs.getString("correo"), rs.getString("password")
+				ad = new Administrador(rs.getInt("cod_amd"), rs.getString("correo"), rs.getString("password")
 						, rs.getString("nombre"), rs.getString("rol") );
 			
 			}
@@ -56,7 +56,7 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 
 	@Override
 	public void delete(Administrador entity) {
-		jdbc.update("DELETE FROM Administrador WHERE cod_admin=" + entity.getCodigo_admin());
+		jdbc.update("DELETE FROM Administrador WHERE cod_amd=" + entity.getCodigo_admin());
 		
 	}
 
@@ -69,7 +69,7 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 		
 		try {
 			while (rs.next()) {
-				administradores.add(new Administrador(rs.getInt("cod_admin"), rs.getString("correo"), rs.getString("password")
+				administradores.add(new Administrador(rs.getInt("cod_amd"), rs.getString("correo"), rs.getString("password")
 						, rs.getString("nombre"), rs.getString("rol")));
 			}
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class JDBC_Administrador_DAO extends JDBCGenericDAO<Administrador, Intege
 	@Override
 	public void update(Administrador entety) {
 		jdbc.update("UPDATE Adminnistrador SET correo='" + entety.getCorreo() + "',password='" + entety.getPassword() + 
-				"', nombre='" + entety.getNombre() + "',rol='" + entety.getRol()+"' WHERE cod_admin=" + entety.getCodigo_admin());
+				"', nombre='" + entety.getNombre() + "',rol='" + entety.getRol()+"' WHERE cod_amd=" + entety.getCodigo_admin());
 		
 	}
 

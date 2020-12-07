@@ -77,14 +77,17 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 	@Override
 	public void update(Producto entety) {
 		
+		
+		
 		//John coloca aqui el query para actulizar a un usuario
-		jdbc.update("UPDATE Producto SET nombre='"+ entety.getNombre() + "',precio='"+ entety.getPrecio() + 
-				    "', porcentajeIva='"+ entety.getIva() + "',url_imagen='"+ entety.getUrl_imagen() 
-				    + "',descripcion='"+ entety.getDescripcion() 
-				    + "' WHERE cod_pro="+entety.getCodigo_pro()+"");
+		jdbc.update("UPDATE Producto SET nombre='"+ entety.getNombre() + "', precio="+ entety.getPrecio() + 
+				    ", estado='"+ entety.getEstado() + "',url_imagen='"+ entety.getUrl_imagen() 
+				    + "',descripcion='"+ entety.getDescripcion() 				   
+				    + "' WHERE cod_pro="+entety.getCodigo_pro()+";");
 				
 	}
 
+	
 	@Override
 	public void delete(Producto entity) {
 		//John colocar el query para la eliminacion de un usuario. 
@@ -144,6 +147,8 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 		return productos;
 	}
 
+
+	
 	@Override
 	public Producto findByPedidoPorEmpresa(Integer codigo_pro) {
 		// TODO Auto-generated method stub
@@ -174,6 +179,41 @@ public class JDBC_Producto_DAO extends JDBCGenericDAO<Producto, Integer> impleme
 		return p;
 
 	}
-	
+
+	@Override
+	public ArrayList<Producto> findProductosPorEmpresa(Integer idEmp) {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		
+		//John colocar el query para obtener todos los usuarios
+		
+		ResultSet rs = jdbc.query("SELECT p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion, p.estado\r\n"
+				+ "FROM Producto p, Categoria c\r\n"
+				+ "WHERE (p.cod_categoria = c.cod_cat) AND (c.cod_empresa = "+idEmp+");");
+		try {
+			while (rs.next()) {
+				//John Actualizar por los atributos que tiene la base de datos
+				
+				Producto p= new Producto(rs.getInt("p.cod_pro"), rs.getString("p.nombre"), rs.getDouble("p.precio")
+						, rs.getInt("p.porcentajeIva"), rs.getString("p.url_imagen"), rs.getString("p.descripcion"),rs.getString("estado"));
+				productos.add(p);
+			}
+		}catch(SQLException e) {
+			System.out.println(">>>WARNING (JDBC_UsuarioDAO:find): "+e.getMessage());
+		}
+		return productos;
+	}
+
+	@Override
+	public void createConCategoria(Producto producto, int categoria) {
+		//Aqui pon el query John para la creacion de un usuario... 
+				//Ejemplo INSERT INTO usuarios (nombre, apellidos) VALUES ('Juan','Garcia Pérez');
+				//Falta buscar a la empresa
+				
+		jdbc.update("INSERT INTO Producto (nombre,precio,porcentajeIva,url_imagen,descripcion,estado,cod_categoria) VALUES"
+				+" ( '" + producto.getNombre() + "', '"
+				+ producto.getPrecio() + "','"+producto.getIva()
+				+"','"+producto.getUrl_imagen()+"','"+producto.getDescripcion()+ "','"+ producto.getEstado()+"'," +categoria+")");
+		
+	}
 
 }

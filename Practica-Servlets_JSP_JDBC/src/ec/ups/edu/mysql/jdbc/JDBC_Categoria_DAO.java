@@ -143,6 +143,34 @@ public class JDBC_Categoria_DAO extends JDBCGenericDAO<Categoria, Integer> imple
 		
 		return categorias;
 	}
+	
+	
+	@Override
+	public ArrayList<Categoria> findCategoriasEmpresa(int idEmp) {
+		
+		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		Categoria c;
+		//Aqui pon el query John para la lectura de la tabla pedidos con el codigo del usuario... 
+		
+		ResultSet rs = jdbc.query("SELECT * FROM Categoria WHERE cod_empresa = "+idEmp);
+		
+		try {
+			while (rs.next()) {
+				if (rs != null) {
+					
+					//Cambiar por los atributos de la tabla Pedido... 
+					//Metodo constructor del Pedido, contiene los atributos y hereda de persona
+					c = new Categoria(rs.getInt("cod_cat"), rs.getString("nombre"), rs.getString("url"));
+					categorias.add(c);
+				}
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(">>>WARNING (PedidoDAO:read):"+e.getMessage());
+		}
+		
+		return categorias;
+	}
 
 	@Override
 	public void createArrayList(ArrayList<Categoria> entity) {

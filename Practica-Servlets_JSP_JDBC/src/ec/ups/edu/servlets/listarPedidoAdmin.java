@@ -42,12 +42,12 @@ public class listarPedidoAdmin extends HttpServlet {
 		Empresa empresa = null;
 		Usuario usuario = null;
 
-		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
+		int adm =  Integer.parseInt(request.getParameter("idAdmin"));
 		int emp =  Integer.parseInt(request.getParameter("idEmp"));
 
 		
 		//aqui debe ser find by empresa 
-		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByUsuarioPedidosCodigo(usu);
+		ArrayList<Pedido> pedidos = DAOFactory.getFactory().getPedido_DAO().findByAdminPedidosCodigo(emp);
 		
 		for (Pedido pedido : pedidos) {
 			pedido.setUsuario(DAOFactory.getFactory().getUsuario_DAO().read(pedido.getCodUsu()));

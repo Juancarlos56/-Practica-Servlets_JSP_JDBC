@@ -1,3 +1,4 @@
+<%@page import="ec.ups.edu.modelo.Administrador"%>
 <%@page import="ec.ups.edu.modelo.Pedido"%>
 <%@page import="ec.ups.edu.dao.DAOFactory"%>
 <%@page import="ec.ups.edu.modelo.Usuario"%>
@@ -19,23 +20,21 @@
 <body background="image/regPedido.png">
 <div class="cuadrado">
 	<% 
-	 	Usuario usuario = (Usuario)request.getAttribute("usuario");
-	 	Empresa empresa = (Empresa)request.getAttribute("empresa");
+	Administrador admin = (Administrador)request.getAttribute("admin");
+ 	Empresa empresa = (Empresa)request.getAttribute("empresa");
 	 	%>
 	 	
 		<h1>Aceptar Pedidos para la Empresa <%=empresa.getNombre()%> </h1>
 		
 		<label id="nomProducto" for="nomProducto" style="margin-right: 50px;" >Listar Pedidos</label>
-		<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
+		<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedidoParaAprobacion(<%=empresa.getCodigo_empresa()%>,<%=admin.getCodigo_admin()%>);" />            
 		 <div class="separador"> </div>
 		 <div id="informacion"><b>Lista de Pedidos</b></div>
 
-		<br>
+		<br>		
 		
-		<input class="boton" type="button" id="aceptarPed" name="aceptarPed" value="Aceptar Pedido" onclick="aceptarPed(<%=usuario.getCodigo_usu()%>)"/>
-				
-				<div class="separador"> </div>
-		        <div id="informacion2"><b>Verificacion de aprobacion del pedido</b></div>
+		<div class="separador"> </div>
+        <div id="informacion2"><b>Verificacion de aprobacion del pedido</b></div>
 
 
 

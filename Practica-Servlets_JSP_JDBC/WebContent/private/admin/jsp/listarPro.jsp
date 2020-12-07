@@ -1,3 +1,4 @@
+<%@page import="ec.ups.edu.modelo.Administrador"%>
 <%@page import="ec.ups.edu.dao.DAOFactory"%>
 <%@page import="ec.ups.edu.modelo.Usuario"%>
 <%@page import="ec.ups.edu.modelo.Empresa"%>
@@ -17,22 +18,21 @@
 <body background="image/regPedido.png">
 	<section class="cuadrado">
 		<% 
-	 	Usuario usuario= (Usuario)request.getAttribute("usuario");
+		Administrador admin = (Administrador)request.getAttribute("admin");
 	 	Empresa empresa = (Empresa)request.getAttribute("empresa");
-	 	
 	 	%>
 	 	
-		<h1> Listar Productos de <%=usuario.getNombre()%> para la Empresa <%=empresa.getNombre()%> </h1>
+		<h1> Listar Productos de <%=admin.getNombre()%> para la Empresa <%=empresa.getNombre()%> </h1>
 		
                     <br>
                     <br>
                     
                     
                 <label id="nomProducto" for="nomProducto" style="margin-right: 50px;" >Listar Productos</label>
-				<input type="button" id="listarPro" name="listarPro" value="Listar" onclick="listarProAdmin(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
+				<input type="button" id="listarPro" name="listarPro" value="Listar" onclick="listarProAdmin(<%=empresa.getCodigo_empresa()%>,<%=admin.getCodigo_admin()%>);" />            
 		        <div class="separador"> </div>
 		        <div id="informacion"><b>Lista de Productos</b></div>
-						<br>
+				<br>
 						
 				
 		</section>

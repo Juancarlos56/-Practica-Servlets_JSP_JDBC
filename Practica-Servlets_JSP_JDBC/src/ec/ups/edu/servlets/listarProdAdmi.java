@@ -35,7 +35,7 @@ public class listarProdAdmi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		System.out.print("ESTOY EN EL SERVLET DE Listar PRODUCTO ADMIN ");
 		response.setContentType("text/html");
@@ -43,18 +43,14 @@ public class listarProdAdmi extends HttpServlet {
 		Empresa empresa = null;
 		Usuario usuario = null;
 
-		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
+		int usu =  Integer.parseInt(request.getParameter("idAdmin"));
 		int emp =  Integer.parseInt(request.getParameter("idEmp"));
 
 		
 		//aqui arreglar 
 		
-		ArrayList<Producto> producto = DAOFactory.getFactory().getProducto_DAO().findByPedidoPorEmpresa("idEmp");
+		ArrayList<Producto> producto = DAOFactory.getFactory().getProducto_DAO().findProductosPorEmpresa(emp);
 		
-		
-		//for (Producto p : producto) {
-			//p.setProducto(DAOFactory.getFactory().getProducto_DAO().read(pedido.getCodPro()));
-	//	}
 		
 		//System.out.println(p.size());
 		String tablaDatos="";
@@ -75,7 +71,7 @@ public class listarProdAdmi extends HttpServlet {
 				tablaDatos = tablaDatos + "<tr>"+
 						"<td>"+pro.getNombre()+"</td>"+
 						"<td>"+pro.getPrecio()+"</td>"+
-						//"<td>"+pro.getEstado +"</td>"+
+						"<td>"+pro.getEstado() +"</td>"+
 						"<td>"+pro.getUrl_imagen()+"</td>"+
 						"<td>"+pro.getDescripcion()+"</td>"+
 						"<td>"+pro.getIva()+"</td>"+

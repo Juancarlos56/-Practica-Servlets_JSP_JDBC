@@ -34,32 +34,27 @@ public class NuevoPro extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		Producto prod = null;
-		Usuario us = null;
-		
-		int usu =  Integer.parseInt(request.getParameter("idUsuario"));
-		
+				//response.getWriter().append("Served at: ").append(request.getContextPath());
+				
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				Producto prod = null;
+				Usuario us = null;
+				
+				
+				int categoria = Integer.parseInt(request.getParameter("categoria"));
+				String nombrePro = request.getParameter("nombrePro");
+				Double precioPro = Double.valueOf(request.getParameter("precioPro"));
+				int iva = Integer.parseInt(request.getParameter("iva"));
+				String estadoProducto = request.getParameter("estadoProducto");
+				String urlImagen = request.getParameter("urlImagen");
+				String descriPro = request.getParameter("descriPro");
+				
+				Producto p = new Producto(-1, nombrePro, precioPro, iva, urlImagen, descriPro, estadoProducto);
+				
+				DAOFactory.getFactory().getProducto_DAO().createConCategoria(p, categoria);
+				out.println("<h3>Se ha creado un nuevo producto </h3>");
 
-		
-		String nombre = request.getParameter("nomPro");
-		double precio = Double.parseDouble(request.getParameter("precioPro"));
-		int iva = Integer.parseInt(request.getParameter("iva"));
-		String estPro = request.getParameter("estPro");
-		String url = request.getParameter("urlPro");
-		String desc = request.getParameter("descriPro");
-		
-		Producto p = new Producto(1,nombre, precio, iva, url,desc,estPro);
-		
-		us = DAOFactory.getFactory().getUsuario_DAO().read(usu);
-		
-	
-		DAOFactory.getFactory().getProducto_DAO().create(p);
-
-		out.println("<h3>Se ha creado un nuevo producto </h3>");
 		
 		
 	}
@@ -68,8 +63,8 @@ public class NuevoPro extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+				
+		
 	}
 
 }

@@ -17,4 +17,6 @@ public interface Empresa_DAO  extends GenericDAO<Empresa, Integer>{
 	public abstract Empresa empresa_de_un_admin(Administrador admin);
 	
 	public abstract ArrayList<Producto> productosEmpresa(String nombreProducto, int idEmpresa);
+
+	public abstract ArrayList<Producto> productosEmpresaTodos(String nombreProducto, int idEmpresa);
 }

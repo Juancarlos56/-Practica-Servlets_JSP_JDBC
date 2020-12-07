@@ -17,6 +17,7 @@
 	    <th class='tg-46ru'>Nombre</th>
 	    <th class='tg-46ru'>Precio</th>
 	    <th class='tg-46ru'>Iva</th>
+	    <th class='tg-46ru'>Estado</th>
 	    <th class='tg-46ru'>Descripcion</th>
 	    <th class='tg-46ru'>Imagen</th>
 	</tr>
@@ -25,7 +26,7 @@
 		
 		String t = "";
 		String n = "";
-		ArrayList<Producto> pro = (ArrayList<Producto>)request.getAttribute("productos");
+		ArrayList<Producto> pro = (ArrayList<Producto>)request.getAttribute("productosAdmin");
 		if(pro !=null){
 		
 			for (int i=0;i<pro.size();i++){
@@ -36,9 +37,12 @@
 						<td><%=producto.getNombre()%></td>
 					    <td><%=producto.getPrecio()%></td>
 					    <td><%=producto.getIva()%></td>
-					    <td><%=producto.getDescripcion()%></td>
-					    <td><img src='<%=producto.getUrl_imagen()%>' width='200px' height='175px'></td>
-					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' value='Seleccionar' onclick="mostrarPedidoPro('<%=producto.getNombre()%>')"></td>
+					    <td><%=producto.getEstado()%></td>
+					    <td><%=producto.getDescripcion()%></td>																																				    <td><img src='<%=producto.getUrl_imagen()%>' width='200px' height='175px'></td>
+					    <td><input type='button' id='productoSeleccionado' name='productoSeleccionado' 
+					    value='Seleccionar' onclick="mostrarPedidoPro(<%=producto.getCodigo_pro()%>,'<%=producto.getNombre()%>',
+					    <%=producto.getPrecio()%>,<%=producto.getIva()%>,'<%=producto.getEstado()%>'
+					    ,'<%=producto.getDescripcion()%>','<%=producto.getUrl_imagen()%>' )"></td>
 				</tr>	
 						 
 		   	<% }

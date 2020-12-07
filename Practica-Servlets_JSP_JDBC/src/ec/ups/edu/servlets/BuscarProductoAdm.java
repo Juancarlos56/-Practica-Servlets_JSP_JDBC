@@ -41,10 +41,10 @@ public class BuscarProductoAdm extends HttpServlet {
 		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
 		Empresa empesa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
 		String pagina = request.getParameter("pagina");
-		ArrayList<Producto> pro = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nomPro, idEmpresa);
+		ArrayList<Producto> pro = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresaTodos(nomPro, idEmpresa);
 		
 		String url = "/private/admin/jsp/mostrarProductosAdmin.jsp";
-		request.setAttribute("productos", pro);
+		request.setAttribute("productosAdmin", pro);
 		request.setAttribute("empresaBusca", empesa);
 		request.getRequestDispatcher(url).forward(request, response);
 		System.out.println("Busqueda de producto pasado");

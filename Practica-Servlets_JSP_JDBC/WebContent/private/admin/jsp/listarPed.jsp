@@ -1,3 +1,4 @@
+<%@page import="ec.ups.edu.modelo.Administrador"%>
 <%@page import="ec.ups.edu.modelo.Pedido"%>
 <%@page import="ec.ups.edu.dao.DAOFactory"%>
 <%@page import="ec.ups.edu.modelo.Usuario"%>
@@ -11,26 +12,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<script src="js/listarPedido.js" type="text/javascript"></script>
+<script src="js/funAdmin.js" type="text/javascript"></script>
 <link rel="StyleSheet" href="CSS/buscaPro.css" TYPE="text/css">
 <title>Listar Pedidos</title>
 </head>
 <body background="image/regPedido.png">
 	<section class="cuadrado">
 		<% 
-	 	Usuario usuario= (Usuario)request.getAttribute("usuario");
+		Administrador admin = (Administrador)request.getAttribute("admin");
 	 	Empresa empresa = (Empresa)request.getAttribute("empresa");
 	 	Pedido pedido = (Pedido)request.getAttribute("pedido");
 	 	%>
 	 	
-		<h1> Listar Pedidos de <%=usuario.getNombre()%> para la Empresa <%=empresa.getNombre()%> </h1>
+		<h1> Listar Pedidos de <%=admin.getNombre()%> para la Empresa <%=empresa.getNombre()%> </h1>
 		
                     <br>
                     <br>
                     
                     
                 <label id="nomProducto" for="nomProducto" style="margin-right: 50px;" >Listar Pedidos</label>
-				<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=usuario.getCodigo_usu() %>);" />            
+				<input type="button" id="listarPedidos" name="listarPedidos" value="Listar" onclick="listarPedido(<%=empresa.getCodigo_empresa()%>,<%=admin.getCodigo_admin() %>);" />            
 		        <div class="separador"> </div>
 		        <div id="informacion"><b>Lista de Pedidos</b></div>
 						<br>

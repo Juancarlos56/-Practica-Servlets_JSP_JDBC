@@ -208,6 +208,40 @@ public class JDBC_Empresa_DAO extends JDBCGenericDAO<Empresa, Integer> implement
 		return prod;
 	}
 	
+	@Override
+	public ArrayList<Producto> productosEmpresaTodos(String nombreProducto, int idEmpresa) {
+		
+		ArrayList<Producto> prod = new ArrayList<Producto>();
+		
+		
+		Producto p = null;
+		
+		System.out.println("Nombre producto: "+nombreProducto+" id Empresa: "+idEmpresa);
+		
+		
+		
+		ResultSet pe = jdbc.query("SELECT  p.cod_pro, p.nombre, p.precio, p.porcentajeIva, p.url_imagen, p.descripcion, p.estado \r\n"
+				+ "            FROM Producto p, Categoria c, Empresa e \r\n"
+				+ "            WHERE p.nombre LIKE '%"+nombreProducto+"%'  AND c.cod_cat = p.cod_categoria AND c.cod_empresa = "+idEmpresa+" AND e.cod_emp = "+idEmpresa+"\r\n"
+				+ "");
+		
+		try {
+			if (pe != null) {
+				while (pe.next()) {
+					System.out.println("Aquiiiiii.....");
+					p = new Producto(pe.getInt("p.cod_pro"), pe.getString("p.nombre"), pe.getDouble("p.precio"), pe.getInt("p.porcentajeIva"), pe.getString("p.url_imagen"), pe.getString("p.descripcion"),pe.getString("estado"));
+					prod.add(p);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(">>>WARNING (JDBC_EmpresaDAO:find): " + e.getMessage());
+		}
+		
+		
+		return prod;
+	}
+	
 	
 	public ArrayList<Producto> todosLosProductosEmpresa(int idEmpresa) {
 		

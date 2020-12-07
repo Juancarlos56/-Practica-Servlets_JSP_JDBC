@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ec.ups.edu.dao.DAOFactory;
+import ec.ups.edu.modelo.Administrador;
 import ec.ups.edu.modelo.Empresa;
 import ec.ups.edu.modelo.Usuario;
 
@@ -36,19 +37,19 @@ public class EnvioDatos2 extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		int idUsuario = Integer.parseInt(request.getParameter("idAdmin"));
+		int idAdmin = Integer.parseInt(request.getParameter("idAdmin"));
 		int idEmpresa = Integer.parseInt(request.getParameter("idEmp"));
 		String pagina = request.getParameter("pagina");
 		
 		//ArrayList<Producto> producto = DAOFactory.getFactory().getEmpresa_DAO().productosEmpresa(nombrePro, idEmpresa);
-		Usuario usuario = DAOFactory.getFactory().getUsuario_DAO().read(idUsuario);
+		Administrador adm = DAOFactory.getFactory().getUAdministrador_DAO().read(idAdmin);
 		Empresa empresa = DAOFactory.getFactory().getEmpresa_DAO().read(idEmpresa);
 		//System.out.println("Producto en Servlet: "+producto.size());
 		
 		String url = "/private/admin/jsp/"+pagina;
 		System.out.println("Pagina: "+url);
 		
-		request.setAttribute("usuario", usuario);
+		request.setAttribute("admin", adm);
 		request.setAttribute("empresa", empresa);
 		request.getRequestDispatcher(url).forward(request, response);
 	}
